@@ -16,11 +16,41 @@
  * @copyright Copyright (c) 2022
  * 
  */
+
 #include <iostream>
 #include <fstream>
 
 #include "p01_strings.h"
 
 int main(int argc, char* argv[]) {
+  std::ifstream filein{argv[1]};
+  std::ofstream fileout{argv[2]};
+  int opcode = atoi(argv[3]);
+  std::string line;
   
+  while (getline(filein, line)) {
+    Cadena(line);
+  }
+
+  switch (opcode) {
+  case 1:
+    /* code */
+    break;
+  case 2:
+
+    break;
+  case 3:
+
+    break;
+  case 4:
+
+    break;
+  case 5:
+  
+    break;
+  default:
+    break;
+  }
+  
+  return 0;
 }
