@@ -3,9 +3,16 @@
 #include <iostream>
 #include <string>
 
-class Cadena {
+class Alfabeto {
  public:
-  Cadena(void) : simbolo_(NULL) {} 
+  Alfabeto(void) : simbolo_(NULL) {} 
  private:
-  char* simbolo_;
+  std::string* simbolo_;
+};
+
+class Cadena : public Alfabeto{
+ public:
+  
+ private:
+
 };
