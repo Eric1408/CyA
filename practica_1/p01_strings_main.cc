@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "p01_strings.h"
 
@@ -27,14 +28,17 @@ int main(int argc, char* argv[]) {
   std::ofstream fileout{argv[2]};
   int opcode = atoi(argv[3]);
   std::string line;
+  std::vector<Cadena> cadenas;
   
   while (getline(filein, line)) {
-    Cadena(line);
+    cadenas.push_back(line);
   }
 
   switch (opcode) {
   case 1:
-    /* code */
+    for (size_t i = 0; i < cadenas.size(); ++i) {
+      std::cout << cadenas[i].Longitud() << std::endl;
+    }
     break;
   case 2:
 
