@@ -33,6 +33,7 @@ int main(int argc, char* argv[]) {
   
   while (getline(filein, line)) {
     cadenas.push_back(line);
+    // El constructor falla en el "hola"
   }
 
   switch (opcode) {
@@ -48,12 +49,23 @@ int main(int argc, char* argv[]) {
     } 
     break;
   case 3: 
-
+    for (size_t i = 0; i < cadenas.size(); ++i) {
+      cadenas[i].Prefix();
+      std::cout << std::endl;
+    }
     break;
   case 4: 
+    for (size_t i = 0; i < cadenas.size(); ++i) {
+      cadenas[i].Suffix();
+      std::cout << std::endl;
+    }
     break;
   case 5:
-
+    for (size_t i = 0; i < cadenas.size(); i++) {
+      cadenas[i].Substring();
+      std::cout << std::endl;
+    }
+    
     break;
   default:
     break;

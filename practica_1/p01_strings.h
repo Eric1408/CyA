@@ -31,8 +31,12 @@ class Alfabeto {
  public:
   Alfabeto(void) : symbol_{} {}
   Alfabeto(std::string);
-  void Build(std::string);
+
+
   void GetAlpha(void);
+  void Build(std::string);
+  int Size(void) {return symbol_.size();}
+  Simbolo GetSymbol(int pos) {return symbol_[pos];}
 
  private:
   std::vector<Simbolo> symbol_;
@@ -53,6 +57,7 @@ void Alfabeto::Build(std::string input) {
     if (input[i] != SPACE) {
       push_string += input[i];
     } else if (input[i] == SPACE || ENDL){
+      std::cout << push_string << " ";
       symbol_.push_back(push_string);
       push_string = "";
     }
@@ -63,14 +68,12 @@ void Alfabeto::Build(std::string input) {
   //    push_string += input[i];
   //  } else if (input[i] == SPACE) {
   //    space = false;
-  //    //std::cout << push_string;
   //    symbol_.push_back(push_string);
   //    push_string = "";
   //  }
   //}
   //
   //if (space) {
-  //  //std::cout << input;
   //  symbol_.push_back(input);
   //}
 }
@@ -93,6 +96,35 @@ class Cadena : public Alfabeto {
 };
 
 void Cadena::Prefix(void) {
+  std::cout << "& ";
+  for (int i = 1; i <= length_; ++i) {
+    std::cout << cadena_.substr(ZERO, i) << ' ';
+  }
+}
+
+void Cadena::Suffix(void) {
+  std::cout << "& ";
+  int pos = 0;
+  
+  for (int i = 1; i <= length_; ++i) {
+    pos = length_ - i;
+    std::cout << cadena_.substr(pos, i) << ' ';
+  }
+}
+
+void Cadena::Substring(void) {
+  std::cout << "& ";
+  for (int i = 0; i < alpha_.Size(); i++) {
+    std::cout << alpha_.GetSymbol(i) << " ";
+  }
+  
+
+  for (int i = 1; i <= length_; i++) {
+    for (int j = 0; j < length_; j++) {
+      //std::cout << cadena_.substr(j, i) << " ";
+    }
+    
+  }
   
 }
 
@@ -109,11 +141,11 @@ Cadena::Cadena(std::string input) {
 
   int cadena_begin = size - length_;
   cadena_ = input.substr(cadena_begin, length_);
-
+  
   int alpha_size = size - length_;
   alpha_size == ZERO ? alpha_size = size : alpha_size;  
-  alpha_.Build(input.substr(ZERO, alpha_size));
-  //alpha_.GetAlpha();
+  alpha_.Build(input.substr(ZERO, alpha_size) + '\n');
+
 }
 
 void Cadena::Reverse() {
