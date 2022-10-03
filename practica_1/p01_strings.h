@@ -49,33 +49,37 @@ void Alfabeto::GetAlpha(void) {
 }
 
 void Alfabeto::Build(std::string input) {
-  //bool space{true};
+  bool space{true};
   int size = input.size();
   std::string push_string{""};
   
-  for (int i = 0; i < size; ++i) {
-    if (input[i] != SPACE) {
-      push_string += input[i];
-    } else if (input[i] == SPACE || ENDL){
-      std::cout << push_string << " ";
-      symbol_.push_back(push_string);
-      push_string = "";
+  size_t found = input.find(SPACE);
+  if (found != std::string::npos) {
+    for (int i = 0; i < size; ++i) {
+      if (input[i] != SPACE) {
+        push_string += input[i];
+      } else if (input[i] == SPACE || ENDL){
+        space = false;
+        symbol_.push_back(push_string);
+        push_string = "";
+      }
     }
+  } else {
+    
+    for (int i = 0; i < size - 1; ++i) {
+      for (int j = i + 1; j < size ; ++j) {
+        if (input[i] != input[j]) {
+          push_string = input[j];
+          symbol_.push_back(push_string);
+        }
+      }
+    }
+    //for (int i = 0; i < input.size(); ++i) {
+    //  push_string = input[i];
+    //  symbol_.push_back(push_string);
+    //}
   }
-  
-  //for (int i = 0; i < size; i++) {
-  //  if (input[i] != SPACE) {
-  //    push_string += input[i];
-  //  } else if (input[i] == SPACE) {
-  //    space = false;
-  //    symbol_.push_back(push_string);
-  //    push_string = "";
-  //  }
-  //}
-  //
-  //if (space) {
-  //  symbol_.push_back(input);
-  //}
+    
 }
 
 class Cadena : public Alfabeto {
@@ -128,6 +132,11 @@ void Cadena::Substring(void) {
   
 }
 
+void Cadena::Reverse() {
+  for (int i = length_; i >= ZERO; --i) 
+    std::cout <<  cadena_[i];
+}
+
 Cadena::Cadena(std::string input) {
   const int size = input.size();
   int i = size;
@@ -144,11 +153,6 @@ Cadena::Cadena(std::string input) {
   
   int alpha_size = size - length_;
   alpha_size == ZERO ? alpha_size = size : alpha_size;  
-  alpha_.Build(input.substr(ZERO, alpha_size) + '\n');
+  alpha_.Build(input.substr(ZERO, alpha_size));
 
-}
-
-void Cadena::Reverse() {
-  for (int i = length_; i >= ZERO; --i) 
-    std::cout <<  cadena_[i];
 }
