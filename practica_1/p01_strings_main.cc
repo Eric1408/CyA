@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
   std::ifstream filein{argv[1]};
   std::ofstream fileout{argv[2]};
   int opcode = atoi(argv[3]);
+
   std::string line;
   std::vector<Cadena> cadenas;
   
@@ -37,20 +38,22 @@ int main(int argc, char* argv[]) {
   switch (opcode) {
   case 1:
     for (size_t i = 0; i < cadenas.size(); ++i) {
-      std::cout << cadenas[i].Longitud() << std::endl;
+      std::cout << cadenas[i].Length() << std::endl;
     }
     break;
   case 2:
+    for (size_t i = 0; i < cadenas.size(); ++i) {
+      cadenas[i].Reverse();
+      std::cout << std::endl;
+    } 
+    break;
+  case 3: 
 
     break;
-  case 3:
-
-    break;
-  case 4:
-
+  case 4: 
     break;
   case 5:
-  
+
     break;
   default:
     break;
