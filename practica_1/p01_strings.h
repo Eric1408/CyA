@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 
 const char SPACE = ' ';
 const char ENDL = '\n';
@@ -43,52 +44,73 @@ class Alfabeto {
 
  private:
   std::vector<Simbolo> symbol_;
+  std::set<Simbolo> set_symbol_;
 };
 
 void Alfabeto::GetAlpha(void) {
-  for (int i = 0; i < symbol_.size(); ++i) {
-    std::cout << symbol_[i] << " ";
+  for (auto& i: set_symbol_) {
+    std::cout << i  << ' ';
+    
   }
+  
+  //for (int i = 0; i < symbol_.size(); ++i) {
+  //  std::cout << symbol_[i] << " ";
+  //}
 }
 
 void Alfabeto::Build(std::string input) {
-  bool space{true};
-  int size = input.size();
+  int find_space = input.find(SPACE);
   std::string push_string{""};
-  
-  size_t found = input.find(SPACE);
-  if (found != std::string::npos) {
-    for (int i = 0; i < size; ++i) {
+
+  if (find_space != std::string::npos) {
+    for (int i = 0; i < input.size(); ++i) {
       if (input[i] != SPACE) {
         push_string += input[i];
-      } else if (input[i] == SPACE || ENDL){
-        space = false;
-        symbol_.push_back(push_string);
-        push_string = "";
+      } else {
+        set_symbol_.insert(push_string);
       }
     }
   } else {
-    // libreria set stl (metodo insert) std::set<Simbolo> name
-    int counter;
-    push_string = input[0];
-    symbol_.push_back(push_string);
-    for (int i = 0; i < size; ++i) {
-      counter = 0;
-      for (int j = 0; j < symbol_.size() ; ++j) {
-        push_string = input[i];
-        if (push_string != symbol_[j].GetSymbol()) {
-          counter++;
-          if (counter == symbol_.size()) {
-            symbol_.push_back(push_string);
-          }
-        }
-      }
-    } 
-    //for (int i = 0; i < input.size(); ++i) {
-    //  push_string = input[i];
-    //  symbol_.push_back(push_string);
-    //}
-  }
+    for (int i = 0; i < input.size(); ++i) {
+      push_string = input[i];
+      set_symbol_.insert(push_string);
+    }
+  } 
+    
+  
+  //bool space{true};
+  //int size = input.size();
+  //std::string push_string{""};
+  //
+  //size_t found = input.find(SPACE);
+  //if (found != std::string::npos) {
+  //  for (int i = 0; i < size; ++i) {
+  //    if (input[i] != SPACE) {
+  //      push_string += input[i];
+  //    } else if (input[i] == SPACE || ENDL){
+  //      space = false;
+  //      symbol_.push_back(push_string);
+  //      push_string = "";
+  //    }
+  //  }
+  //} else {
+  //  // libreria set stl (metodo insert) std::set<Simbolo> name
+  //  int counter;
+  //  push_string = input[0];
+  //  symbol_.push_back(push_string);
+  //  for (int i = 0; i < size; ++i) {
+  //    counter = 0;
+  //    for (int j = 0; j < symbol_.size() ; ++j) {
+  //      push_string = input[i];
+  //      if (push_string != symbol_[j].GetSymbol()) {
+  //        counter++;
+  //        if (counter == symbol_.size()) {
+  //          symbol_.push_back(push_string);
+  //        }
+  //      }
+  //    }
+  //  } 
+  //}
     
 }
 
@@ -148,21 +170,34 @@ void Cadena::Reverse() {
 }
 
 Cadena::Cadena(std::string input) {
-  const int size = input.size();
-  int i = size;
-  length_ = -1;
-
-  while (input[i] != SPACE) {
-    length_++;
-    length_ > size ? length_ = input.size() : length_ ;
-    --i;
+  int last_space = input.find_last_of(SPACE);
+  //std::cout << "last_space = " << last_space << " input.substr : " << input.substr(ZERO, last_space) << '\n';
+  alpha_.Build(input.substr(ZERO, last_space));
+  alpha_.GetAlpha();
+  if (last_space != std::string::npos) {
+    length_ = input.size() - last_space - 1;
+    cadena_ = input.substr(last_space, length_);
+  } else {
+    length_ = input.size();
+    cadena_ = input;
   }
 
-  int cadena_begin = size - length_;
-  cadena_ = input.substr(cadena_begin, length_);
-  
-  int alpha_size = size - length_;
-  alpha_size == ZERO ? alpha_size = size : alpha_size;  
-  alpha_.Build(input.substr(ZERO, alpha_size));
+
+  //const int size = input.size();
+  //int i = size;
+  //length_ = -1;
+//
+  //while (input[i] != SPACE) {
+  //  length_++;
+  //  length_ > size ? length_ = input.size() : length_ ;
+  //  --i;
+  //}
+//
+  //int cadena_begin = size - length_;
+  //cadena_ = input.substr(cadena_begin, length_);
+  //
+  //int alpha_size = size - length_;
+  //alpha_size == ZERO ? alpha_size = size : alpha_size;  
+  //alpha_.Build(input.substr(ZERO, alpha_size));
 
 }
