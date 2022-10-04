@@ -83,7 +83,7 @@ void Alfabeto::Build(std::string input) {
           }
         }
       }
-    }
+    } 
     //for (int i = 0; i < input.size(); ++i) {
     //  push_string = input[i];
     //  symbol_.push_back(push_string);

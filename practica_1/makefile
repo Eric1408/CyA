@@ -12,3 +12,4 @@ p01_strings: p01_strings.o p01_strings_main.o
 
 clean:
 	rm -rf *.o
+
