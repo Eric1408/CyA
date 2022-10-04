@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include <set>
 
 const char SPACE = ' ';
@@ -39,79 +40,86 @@ class Alfabeto {
 
   void GetAlpha(void);
   void Build(std::string);
-  int Size(void) {return symbol_.size();}
-  Simbolo GetSymbol(int pos) {return symbol_[pos];}
+  inline int Size(void) {return symbol_.size();}
+  inline Simbolo at(int pos) {return symbol_[pos];}
 
  private:
   std::vector<Simbolo> symbol_;
-  std::set<Simbolo> set_symbol_;
+  //std::set<Simbolo> set_symbol_;
 };
 
 void Alfabeto::GetAlpha(void) {
-  for (auto& i: set_symbol_) {
-    std::cout << i  << ' ';
-    
-  }
   
-  //for (int i = 0; i < symbol_.size(); ++i) {
-  //  std::cout << symbol_[i] << " ";
+  ////////// GETALPHA PARA STD::SET 
+
+  //for (auto& i: set_symbol_) {
+  //  std::cout << i  << ' ';
+  //  
   //}
+  
+  for (int i = 0; i < symbol_.size(); ++i) {
+    std::cout << symbol_[i] << " ";
+  }
 }
 
 void Alfabeto::Build(std::string input) {
-  int find_space = input.find(SPACE);
-  std::string push_string{""};
-
-  if (find_space != std::string::npos) {
-    for (int i = 0; i < input.size(); ++i) {
-      if (input[i] != SPACE) {
-        push_string += input[i];
-      } else {
-        set_symbol_.insert(push_string);
-      }
-    }
-  } else {
-    for (int i = 0; i < input.size(); ++i) {
-      push_string = input[i];
-      set_symbol_.insert(push_string);
-    }
-  } 
-    
   
-  //bool space{true};
-  //int size = input.size();
+  ////////// BUILD PARA STD::SET
+  
+  //int find_space = input.find(SPACE);
   //std::string push_string{""};
-  //
-  //size_t found = input.find(SPACE);
-  //if (found != std::string::npos) {
-  //  for (int i = 0; i < size; ++i) {
+  
+  //if (find_space != std::string::npos) {
+  //  for (int i = 0; i < input.size(); ++i) {
   //    if (input[i] != SPACE) {
   //      push_string += input[i];
-  //    } else if (input[i] == SPACE || ENDL){
-  //      space = false;
-  //      symbol_.push_back(push_string);
-  //      push_string = "";
+  //    } else {
+  //      set_symbol_.insert(push_string);
   //    }
   //  }
   //} else {
-  //  // libreria set stl (metodo insert) std::set<Simbolo> name
-  //  int counter;
-  //  push_string = input[0];
-  //  symbol_.push_back(push_string);
-  //  for (int i = 0; i < size; ++i) {
-  //    counter = 0;
-  //    for (int j = 0; j < symbol_.size() ; ++j) {
-  //      push_string = input[i];
-  //      if (push_string != symbol_[j].GetSymbol()) {
-  //        counter++;
-  //        if (counter == symbol_.size()) {
-  //          symbol_.push_back(push_string);
-  //        }
-  //      }
-  //    }
-  //  } 
-  //}
-    
+  //  for (int i = 0; i < input.size(); ++i) {
+  //    push_string = input[i];
+  //    set_symbol_.insert(push_string);
+  //  }
+  //} 
+  
+  ////////// CONSTRUCTOR QUE FUNCIONA CON VECTOR<SIMBOLO>
+  
+  bool space{true};
+  int size = input.size();
+  std::string push_string{""};
+  
+  size_t found = input.find(SPACE);
+  if (found != std::string::npos) {
+    for (int i = 0; i < size; ++i) {
+      if (input[i] != SPACE) {
+        push_string += input[i];
+      } else if (input[i] == SPACE || ENDL){
+        space = false;
+        symbol_.push_back(push_string);
+        push_string = "";
+      }
+    }
+  } else {
+    int counter;
+    push_string = input[0];
+    symbol_.push_back(push_string);
+    for (int i = 0; i < size; ++i) {
+      counter = 0;
+      for (int j = 0; j < symbol_.size() ; ++j) {
+        push_string = input[i];
+        if (push_string != symbol_[j].GetSymbol()) {
+          counter++;
+          if (counter == symbol_.size()) {
+            symbol_.push_back(push_string);
+          }
+        }
+      }
+    } 
+  }
+  // metodo sort para ordenar el alphabeto de mayor a menor
+  std::sort(symbol_.begin(), symbol_.end());
 }
 
 class Cadena : public Alfabeto {
@@ -129,6 +137,7 @@ class Cadena : public Alfabeto {
   int length_;
   std::string cadena_;
   Alfabeto alpha_;
+  std::vector<Simbolo> sim_cadena_;
 };
 
 void Cadena::Prefix(void) {
@@ -151,7 +160,7 @@ void Cadena::Suffix(void) {
 void Cadena::Substring(void) {
   std::cout << "& ";
   for (int i = 0; i < alpha_.Size(); i++) {
-    std::cout << alpha_.GetSymbol(i) << " ";
+    std::cout << alpha_.at(i) << " ";
   }
   
 
@@ -159,7 +168,6 @@ void Cadena::Substring(void) {
     for (int j = 0; j < length_; j++) {
       //std::cout << cadena_.substr(j, i) << " ";
     }
-    
   }
   
 }
@@ -171,10 +179,21 @@ void Cadena::Reverse() {
 
 Cadena::Cadena(std::string input) {
   int last_space = input.find_last_of(SPACE);
+  int size = input.size() - last_space;
   //std::cout << "last_space = " << last_space << " input.substr : " << input.substr(ZERO, last_space) << '\n';
   alpha_.Build(input.substr(ZERO, last_space));
   alpha_.GetAlpha();
+
   if (last_space != std::string::npos) {
+    for (int i = 0; i < alpha_.Size(); ++i) {
+      int ok_string = input.find(alpha_.at(i).GetSymbol());
+      if (ok_string == std::string::npos) {
+        std::cout << "La cadena no pertenece al alfabeto.\n";
+      } else {
+        
+      }
+    }  
+    
     length_ = input.size() - last_space - 1;
     cadena_ = input.substr(last_space, length_);
   } else {
@@ -182,6 +201,7 @@ Cadena::Cadena(std::string input) {
     cadena_ = input;
   }
 
+////////// CONSTRUCTOR QUE FUNCIONA CON STRINGS Y COGE LA CADENA DESDE EL FINAL
 
   //const int size = input.size();
   //int i = size;

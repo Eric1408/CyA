@@ -35,7 +35,6 @@ int main(int argc, char* argv[]) {
   
   while (getline(filein, line)) {
     cadenas.push_back(line);
-    // El constructor falla en el "hola"
   }
 
   switch (opcode) {
