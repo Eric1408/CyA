@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include <string>
 
 const char SPACE = ' ';
@@ -11,6 +12,8 @@ class Simbolo {
  public:
   Simbolo(void) : symbol_("") {}
   Simbolo(std::string input) {symbol_ = input;}
+
+  std::string GetSymbol(void) {return symbol_;}
 
   void Write(std::ostream&) const;
 
@@ -65,12 +68,19 @@ void Alfabeto::Build(std::string input) {
       }
     }
   } else {
-    
-    for (int i = 0; i < size - 1; ++i) {
-      for (int j = i + 1; j < size ; ++j) {
-        if (input[i] != input[j]) {
-          push_string = input[j];
-          symbol_.push_back(push_string);
+    // libreria set stl (metodo insert) std::set<Simbolo> name
+    int counter;
+    push_string = input[0];
+    symbol_.push_back(push_string);
+    for (int i = 0; i < size; ++i) {
+      counter = 0;
+      for (int j = 0; j < symbol_.size() ; ++j) {
+        push_string = input[i];
+        if (push_string != symbol_[j].GetSymbol()) {
+          counter++;
+          if (counter == symbol_.size()) {
+            symbol_.push_back(push_string);
+          }
         }
       }
     }
