@@ -152,33 +152,33 @@ class Cadena : public Alfabeto {
 
  private:
   int length_;
-  std::string cadena_;
+  //std::string cadena_;
   Alfabeto alpha_;
   std::vector<Simbolo> sim_cadena_;
 };
 
 void Cadena::Prefix(void) {
   std::cout << "& ";
-  for (int i = 1; i <= length_; ++i) {
-    std::cout << cadena_.substr(ZERO, i) << ' ';
-  }
+  //for (int i = 1; i <= length_; ++i) {
+  //  std::cout << cadena_.substr(ZERO, i) << ' ';
+  //}
 }
 
 void Cadena::Suffix(void) {
   std::cout << "& ";
   int pos = 0;
   
-  for (int i = 1; i <= length_; ++i) {
-    pos = length_ - i;
-    std::cout << cadena_.substr(pos, i) << ' ';
-  }
+  //for (int i = 1; i <= length_; ++i) {
+  //  pos = length_ - i;
+  //  std::cout << cadena_.substr(pos, i) << ' ';
+  //}
 }
 
 void Cadena::Substring(void) {
   std::cout << "& ";
-  for (int i = 0; i < alpha_.Size(); i++) {
-    std::cout << alpha_.at(i) << " ";
-  }
+  //for (int i = 0; i < alpha_.Size(); i++) {
+  //  std::cout << alpha_.at(i) << " ";
+  //}
   
 
   for (int i = 1; i <= length_; i++) {
@@ -190,8 +190,8 @@ void Cadena::Substring(void) {
 }
 
 void Cadena::Reverse() {
-  for (int i = length_; i >= ZERO; --i) 
-    std::cout <<  cadena_[i];
+  //for (int i = length_; i >= ZERO; --i) 
+  //  std::cout <<  cadena_[i];
 }
 
 bool Cadena::IsCorrect(std::string input) {
@@ -214,7 +214,7 @@ Cadena::Cadena(std::string input) {
     alpha_.Build(input.substr(ZERO, last_space + 1));
     //int romper = 0;
     int pos{0};
-    if (IsCorrect(cadena)) {
+    //if (IsCorrect(cadena)) {
       while (cadena.size() > ZERO) {
         bool inside = {false};
         for (int i = 0; i < alpha_.at(pos).SymSize(); ++i) {
@@ -250,9 +250,9 @@ Cadena::Cadena(std::string input) {
         //}
         //romper++;
       }
-    } else {
-      std::cout << "La cadena introducida no corresponde al alfabeto proporcionado\n";
-    }
+    //} else {
+    //  std::cout << "La cadena introducida no corresponde al alfabeto proporcionado\n";
+    //}
     
   } else {
     //cadena = input.substr(ZERO, last_space);
