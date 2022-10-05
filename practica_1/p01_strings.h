@@ -7,7 +7,6 @@
 #include <set>
 
 const char SPACE = ' ';
-const char ENDL = '\n';
 const int ZERO = 0;
 
 class Simbolo {
@@ -15,7 +14,9 @@ class Simbolo {
   Simbolo(void) : symbol_("") {}
   Simbolo(std::string input) {symbol_ = input;}
 
-  std::string GetSymbol(void) {return symbol_;}
+  inline std::string GetSymbol(void) {return symbol_;}
+  inline int SymSize(void) {return symbol_.size();}
+  inline void SetSym(std::string input) {symbol_ = input;}
 
   void Write(std::ostream&) const;
 
@@ -38,6 +39,7 @@ class Alfabeto {
   Alfabeto(std::string);
 
 
+  void Sort(void);
   void GetAlpha(void);
   void Build(std::string);
   inline int Size(void) {return symbol_.size();}
@@ -47,6 +49,20 @@ class Alfabeto {
   std::vector<Simbolo> symbol_;
   //std::set<Simbolo> set_symbol_;
 };
+
+void Alfabeto::Sort(void) {
+  std::string aux;
+  for (int i = 0; i < Size(); i++) {
+    for (int j = Size() - 1; j > i; --j) {
+      if (symbol_[i].SymSize() < symbol_[j].SymSize()) {
+        aux = symbol_[i].GetSymbol();
+        symbol_[i].SetSym(symbol_[j].GetSymbol());
+        symbol_[j].SetSym(aux);
+      }
+    }
+    
+  }
+}
 
 void Alfabeto::GetAlpha(void) {
   
@@ -64,7 +80,7 @@ void Alfabeto::GetAlpha(void) {
 
 void Alfabeto::Build(std::string input) {
   
-  ////////// BUILD PARA STD::SET
+  ////////// BUILD PARA SET<SIMBOLO>
   
   //int find_space = input.find(SPACE);
   //std::string push_string{""};
@@ -86,17 +102,17 @@ void Alfabeto::Build(std::string input) {
   
   ////////// CONSTRUCTOR QUE FUNCIONA CON VECTOR<SIMBOLO>
   
-  bool space{true};
   int size = input.size();
   std::string push_string{""};
   
   size_t found = input.find(SPACE);
   if (found != std::string::npos) {
+    //std::cout << "size = " << size << std::endl;
     for (int i = 0; i < size; ++i) {
       if (input[i] != SPACE) {
         push_string += input[i];
-      } else if (input[i] == SPACE || ENDL){
-        space = false;
+        //std::cout << "pushstring = " << push_string << std::endl;
+      } else if (input[i] == SPACE){
         symbol_.push_back(push_string);
         push_string = "";
       }
@@ -119,7 +135,7 @@ void Alfabeto::Build(std::string input) {
     } 
   }
   // metodo sort para ordenar el alphabeto de mayor a menor
-  std::sort(symbol_.begin(), symbol_.end());
+  Sort();
 }
 
 class Cadena : public Alfabeto {
@@ -179,12 +195,11 @@ void Cadena::Reverse() {
 
 Cadena::Cadena(std::string input) {
   int last_space = input.find_last_of(SPACE);
-  int size = input.size() - last_space;
-  //std::cout << "last_space = " << last_space << " input.substr : " << input.substr(ZERO, last_space) << '\n';
-  alpha_.Build(input.substr(ZERO, last_space));
-  alpha_.GetAlpha();
+  int size = input.size() - last_space - 1;
+ 
 
   if (last_space != std::string::npos) {
+    alpha_.Build(input.substr(ZERO, last_space + 1));
     for (int i = 0; i < alpha_.Size(); ++i) {
       int ok_string = input.find(alpha_.at(i).GetSymbol());
       if (ok_string == std::string::npos) {
@@ -197,10 +212,12 @@ Cadena::Cadena(std::string input) {
     length_ = input.size() - last_space - 1;
     cadena_ = input.substr(last_space, length_);
   } else {
+    alpha_.Build(input.substr(ZERO, last_space));
     length_ = input.size();
     cadena_ = input;
   }
-
+  alpha_.GetAlpha();
+  std::cout << std::endl;
 ////////// CONSTRUCTOR QUE FUNCIONA CON STRINGS Y COGE LA CADENA DESDE EL FINAL
 
   //const int size = input.size();
@@ -219,5 +236,4 @@ Cadena::Cadena(std::string input) {
   //int alpha_size = size - length_;
   //alpha_size == ZERO ? alpha_size = size : alpha_size;  
   //alpha_.Build(input.substr(ZERO, alpha_size));
-
 }
