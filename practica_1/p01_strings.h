@@ -3,8 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm>
-#include <set>
+#include <cstdlib>
 
 const char SPACE = ' ';
 const int ZERO = 0;
@@ -149,6 +148,7 @@ class Cadena : public Alfabeto {
   void Prefix(void);
   void Suffix(void);
   void Substring(void);
+  bool IsCorrect(std::string);
 
  private:
   int length_;
@@ -194,6 +194,15 @@ void Cadena::Reverse() {
     std::cout <<  cadena_[i];
 }
 
+bool Cadena::IsCorrect(std::string input) {
+  std::string aux;
+  while (input.size() > ZERO) {
+    for (int i = 0; i < input.size(); ++i) {
+      
+    }
+  }
+}
+
 Cadena::Cadena(std::string input) {
   int last_space = input.find_last_of(SPACE);
   int size = input.size() - last_space - 1;
@@ -201,32 +210,57 @@ Cadena::Cadena(std::string input) {
   std::string push_symbol;
   length_ = 0;
 
-  if (last_space != std::string::npos) {
+  if (last_space != std::string::npos ) {
     alpha_.Build(input.substr(ZERO, last_space + 1));
-    for (int i = 0; i < cadena.size(); ++i) {
-      push_symbol += cadena[i];
-      std::cout << "push sym = " << push_symbol << std::endl;
-      for (int j = 0; j < alpha_.Size(); ++j) {
-        std::cout << "alpha[j] = " << alpha_.at(j).GetSymbol() << std::endl;
-        if (alpha_.at(j).GetSymbol() == push_symbol) {
-          sim_cadena_.push_back(push_symbol);
-          length_++;
-          push_symbol = {""};
+    //int romper = 0;
+    int pos{0};
+    if (IsCorrect(cadena)) {
+      while (cadena.size() > ZERO) {
+        bool inside = {false};
+        for (int i = 0; i < alpha_.at(pos).SymSize(); ++i) {
+          //std::cout << "iteracion i = " << i << std::endl;
+          //std::cout << "  push sym = " << push_symbol << std::endl;
+          //std::cout << "  pos = " << pos << std::endl;
+          //std::cout << "  alpha.getsym = " << alpha_.at(pos).GetSymbol() << std::endl;
+          push_symbol += cadena[i];        
+          if (push_symbol == alpha_.at(pos).GetSymbol()) {
+            //std::cout << "  Entrando en el if push == sym\n";
+            //std::cout << "    size cadena = " << cadena.size() << std::endl;
+            //std::cout << "    size cadena = " << cadena.size() << std::endl;
+            inside = true;
+            sim_cadena_.push_back(push_symbol);
+            cadena.erase(ZERO, push_symbol.size());
+            push_symbol = "";
+            length_++;
+          } else {
+            inside = false;
+          }
         }
+        if (inside == false) {
+          //std::cout << "Entrando en el if inside\n";
+          ++pos;
+          push_symbol = "";
+        }
+        if (pos == alpha_.Size()) {
+          //std::cout << "Estra al if (pos == alpha.Size - 1)\n";
+          pos = 0;
+        }
+        //if (romper == 20) {
+        //  break;
+        //}
+        //romper++;
       }
+    } else {
+      std::cout << "La cadena introducida no corresponde al alfabeto proporcionado\n";
     }
+    
   } else {
-    alpha_.Build(input.substr(ZERO, last_space));
-    int i = 0;
-    while (i < alpha_.Size()) {
-      int found = cadena.find(alpha_.at(i).GetSymbol());
-      if (found != std::string::npos) {
-        length_++;
-        sim_cadena_.push_back(cadena.substr(found, alpha_.at(i).SymSize()));
-        cadena.erase(found, alpha_.at(i).SymSize());
-      } else {
-        ++i;
-      }
+    //cadena = input.substr(ZERO, last_space);
+    alpha_.Build(cadena);
+    for (int i = 0; i < cadena.size(); ++i) {
+      push_symbol = cadena[i];
+      sim_cadena_.push_back(push_symbol);
+      length_++;
     }
   }
   alpha_.GetAlpha();

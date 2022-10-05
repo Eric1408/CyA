@@ -21,7 +21,6 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <set>
 
 #include "p01_strings.h"
 
