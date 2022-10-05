@@ -44,6 +44,7 @@ class Alfabeto {
   void Build(std::string);
   inline int Size(void) {return symbol_.size();}
   inline Simbolo at(int pos) {return symbol_[pos];}
+  //inline std::string GetSym(int i) {return symbol_[i].GetSymbol();}
 
  private:
   std::vector<Simbolo> symbol_;
@@ -196,28 +197,41 @@ void Cadena::Reverse() {
 Cadena::Cadena(std::string input) {
   int last_space = input.find_last_of(SPACE);
   int size = input.size() - last_space - 1;
- 
+  std::string cadena = input.substr(last_space + 1, size);
+  std::string push_symbol;
+  length_ = 0;
 
   if (last_space != std::string::npos) {
     alpha_.Build(input.substr(ZERO, last_space + 1));
-    for (int i = 0; i < alpha_.Size(); ++i) {
-      int ok_string = input.find(alpha_.at(i).GetSymbol());
-      if (ok_string == std::string::npos) {
-        std::cout << "La cadena no pertenece al alfabeto.\n";
-      } else {
-        
+    for (int i = 0; i < cadena.size(); ++i) {
+      push_symbol += cadena[i];
+      std::cout << "push sym = " << push_symbol << std::endl;
+      for (int j = 0; j < alpha_.Size(); ++j) {
+        std::cout << "alpha[j] = " << alpha_.at(j).GetSymbol() << std::endl;
+        if (alpha_.at(j).GetSymbol() == push_symbol) {
+          sim_cadena_.push_back(push_symbol);
+          length_++;
+          push_symbol = {""};
+        }
       }
-    }  
-    
-    length_ = input.size() - last_space - 1;
-    cadena_ = input.substr(last_space, length_);
+    }
   } else {
     alpha_.Build(input.substr(ZERO, last_space));
-    length_ = input.size();
-    cadena_ = input;
+    int i = 0;
+    while (i < alpha_.Size()) {
+      int found = cadena.find(alpha_.at(i).GetSymbol());
+      if (found != std::string::npos) {
+        length_++;
+        sim_cadena_.push_back(cadena.substr(found, alpha_.at(i).SymSize()));
+        cadena.erase(found, alpha_.at(i).SymSize());
+      } else {
+        ++i;
+      }
+    }
   }
   alpha_.GetAlpha();
   std::cout << std::endl;
+
 ////////// CONSTRUCTOR QUE FUNCIONA CON STRINGS Y COGE LA CADENA DESDE EL FINAL
 
   //const int size = input.size();
