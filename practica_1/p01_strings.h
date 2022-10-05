@@ -43,11 +43,9 @@ class Alfabeto {
   void Build(std::string);
   inline int Size(void) {return symbol_.size();}
   inline Simbolo at(int pos) {return symbol_[pos];}
-  //inline std::string GetSym(int i) {return symbol_[i].GetSymbol();}
 
  private:
   std::vector<Simbolo> symbol_;
-  //std::set<Simbolo> set_symbol_;
 };
 
 void Alfabeto::Sort(void) {
@@ -65,41 +63,12 @@ void Alfabeto::Sort(void) {
 }
 
 void Alfabeto::GetAlpha(void) {
-  
-  ////////// GETALPHA PARA STD::SET 
-
-  //for (auto& i: set_symbol_) {
-  //  std::cout << i  << ' ';
-  //  
-  //}
-  
   for (int i = 0; i < symbol_.size(); ++i) {
     std::cout << symbol_[i] << " ";
   }
 }
 
 void Alfabeto::Build(std::string input) {
-  
-  ////////// BUILD PARA SET<SIMBOLO>
-  
-  //int find_space = input.find(SPACE);
-  //std::string push_string{""};
-  
-  //if (find_space != std::string::npos) {
-  //  for (int i = 0; i < input.size(); ++i) {
-  //    if (input[i] != SPACE) {
-  //      push_string += input[i];
-  //    } else {
-  //      set_symbol_.insert(push_string);
-  //    }
-  //  }
-  //} else {
-  //  for (int i = 0; i < input.size(); ++i) {
-  //    push_string = input[i];
-  //    set_symbol_.insert(push_string);
-  //  }
-  //} 
-  
   ////////// CONSTRUCTOR QUE FUNCIONA CON VECTOR<SIMBOLO>
   
   int size = input.size();
@@ -107,11 +76,9 @@ void Alfabeto::Build(std::string input) {
   
   size_t found = input.find(SPACE);
   if (found != std::string::npos) {
-    //std::cout << "size = " << size << std::endl;
     for (int i = 0; i < size; ++i) {
       if (input[i] != SPACE) {
         push_string += input[i];
-        //std::cout << "pushstring = " << push_string << std::endl;
       } else if (input[i] == SPACE){
         symbol_.push_back(push_string);
         push_string = "";
@@ -152,15 +119,15 @@ class Cadena : public Alfabeto {
 
  private:
   int length_;
-  std::string cadena_;
   Alfabeto alpha_;
+  
   std::vector<Simbolo> sim_cadena_;
 };
 
 void Cadena::Prefix(void) {
   std::cout << "& ";
   for (int i = 1; i <= length_; ++i) {
-    std::cout << cadena_.substr(ZERO, i) << ' ';
+    //std::cout << cadena_.substr(ZERO, i) << ' ';
   }
 }
 
@@ -170,7 +137,7 @@ void Cadena::Suffix(void) {
   
   for (int i = 1; i <= length_; ++i) {
     pos = length_ - i;
-    std::cout << cadena_.substr(pos, i) << ' ';
+    //std::cout << cadena_.substr(pos, i) << ' ';
   }
 }
 
@@ -190,20 +157,14 @@ void Cadena::Substring(void) {
 }
 
 void Cadena::Reverse() {
-  for (int i = length_; i >= ZERO; --i) 
-    std::cout <<  cadena_[i];
-}
-
-bool Cadena::IsCorrect(std::string input) {
-  std::string aux;
-  while (input.size() > ZERO) {
-    for (int i = 0; i < input.size(); ++i) {
-      
-    }
+  for (int i = length_; i >= ZERO; --i) {
+    //std::cout <<  cadena_[i];
   }
 }
 
+
 Cadena::Cadena(std::string input) {
+  const int MAX_BUCLE = 500;
   int last_space = input.find_last_of(SPACE);
   int size = input.size() - last_space - 1;
   std::string cadena = input.substr(last_space + 1, size);
@@ -212,48 +173,48 @@ Cadena::Cadena(std::string input) {
 
   if (last_space != std::string::npos ) {
     alpha_.Build(input.substr(ZERO, last_space + 1));
-    //int romper = 0;
+    int romper = 0;
     int pos{0};
-    if (IsCorrect(cadena)) {
-      while (cadena.size() > ZERO) {
-        bool inside = {false};
-        for (int i = 0; i < alpha_.at(pos).SymSize(); ++i) {
-          //std::cout << "iteracion i = " << i << std::endl;
-          //std::cout << "  push sym = " << push_symbol << std::endl;
-          //std::cout << "  pos = " << pos << std::endl;
-          //std::cout << "  alpha.getsym = " << alpha_.at(pos).GetSymbol() << std::endl;
-          push_symbol += cadena[i];        
-          if (push_symbol == alpha_.at(pos).GetSymbol()) {
-            //std::cout << "  Entrando en el if push == sym\n";
-            //std::cout << "    size cadena = " << cadena.size() << std::endl;
-            //std::cout << "    size cadena = " << cadena.size() << std::endl;
-            inside = true;
-            sim_cadena_.push_back(push_symbol);
-            cadena.erase(ZERO, push_symbol.size());
-            push_symbol = "";
-            length_++;
-          } else {
-            inside = false;
-          }
-        }
-        if (inside == false) {
-          //std::cout << "Entrando en el if inside\n";
-          ++pos;
-          push_symbol = "";
-        }
-        if (pos == alpha_.Size()) {
-          //std::cout << "Estra al if (pos == alpha.Size - 1)\n";
-          pos = 0;
-        }
-        //if (romper == 20) {
-        //  break;
-        //}
-        //romper++;
+    //if (IsCorrect(cadena)) {
+    while (cadena.size() > ZERO) {
+      bool inside = {false};
+      if (romper == MAX_BUCLE) {
+        std::cout << "La cadena no pertenece al alfabeto\n";
+        break;
       }
-    } else {
-      std::cout << "La cadena introducida no corresponde al alfabeto proporcionado\n";
+      for (int i = 0; i < alpha_.at(pos).SymSize(); ++i) {
+        //std::cout << "iteracion i = " << i << std::endl;
+        //std::cout << "  push sym = " << push_symbol << std::endl;
+        //std::cout << "  pos = " << pos << std::endl;
+        //std::cout << "  alpha.getsym = " << alpha_.at(pos).GetSymbol() << std::endl;
+        push_symbol += cadena[i];        
+        if (push_symbol == alpha_.at(pos).GetSymbol()) {
+          //std::cout << "  Entrando en el if push == sym\n";
+          //std::cout << "    size cadena = " << cadena.size() << std::endl;
+          //std::cout << "    size cadena = " << cadena.size() << std::endl;
+          inside = true;
+          sim_cadena_.push_back(push_symbol);
+          cadena.erase(ZERO, push_symbol.size());
+          push_symbol = "";
+          length_++;
+        } else {
+          inside = false;
+        }
+      }
+      if (inside == false) {
+        //std::cout << "Entrando en el if inside\n";
+        ++pos;
+        push_symbol = "";
+      }
+      if (pos == alpha_.Size()) {
+        //std::cout << "Estra al if (pos == alpha.Size - 1)\n";
+        pos = 0;
+      }
+      //if (romper == 20) {
+      //  break;
+      //}
+      romper++;
     }
-    
   } else {
     //cadena = input.substr(ZERO, last_space);
     alpha_.Build(cadena);
@@ -265,23 +226,4 @@ Cadena::Cadena(std::string input) {
   }
   alpha_.GetAlpha();
   std::cout << std::endl;
-
-////////// CONSTRUCTOR QUE FUNCIONA CON STRINGS Y COGE LA CADENA DESDE EL FINAL
-
-  //const int size = input.size();
-  //int i = size;
-  //length_ = -1;
-//
-  //while (input[i] != SPACE) {
-  //  length_++;
-  //  length_ > size ? length_ = input.size() : length_ ;
-  //  --i;
-  //}
-//
-  //int cadena_begin = size - length_;
-  //cadena_ = input.substr(cadena_begin, length_);
-  //
-  //int alpha_size = size - length_;
-  //alpha_size == ZERO ? alpha_size = size : alpha_size;  
-  //alpha_.Build(input.substr(ZERO, alpha_size));
 }

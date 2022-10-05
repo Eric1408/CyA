@@ -24,6 +24,7 @@
 
 #include "p01_strings.h"
 
+
 int main(int argc, char* argv[]) {
   std::ifstream filein{argv[1]};
   std::ofstream fileout{argv[2]};
@@ -69,7 +70,5 @@ int main(int argc, char* argv[]) {
     break;
   default:
     break;
-  }
-  
-  return 0; 
 }
+
