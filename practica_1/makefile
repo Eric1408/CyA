@@ -4,7 +4,7 @@ LDFLAGS =
 
 all: p01_strings
 
-p01_strings: p01_strings.o p01_strings_main.o
+p01_strings: simbolo.o alfabeto.o cadena.o usage.o p01_strings_main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean
