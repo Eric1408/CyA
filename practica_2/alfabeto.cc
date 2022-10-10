@@ -23,11 +23,16 @@
  * 
  */
 void Alfabeto::GetAlpha(void) {
-  for (auto& str: this->symbol_)
-  {
+  for (auto& str: this->symbol_) {
     std::cout << str;
   }
   
+}
+
+void Alfabeto::GetAlpha(const Alfabeto& alpha) {
+  for (auto& str : alpha.symbol_) {
+    std::cout << str;
+  }
 }
 
 /**
@@ -75,6 +80,10 @@ void Alfabeto::Build(std::string input) {
   for (size_t i = 0; i < input.size(); i++) {
     push = input[i];
     symbol_.insert(push);
+  }
+  std::set<Simbolo>::iterator it;
+  for (auto it = symbol_.begin(); it != symbol_.end(); it++) {
+    std::cout << *it;
   }
 }
 

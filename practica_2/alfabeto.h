@@ -16,6 +16,7 @@
 #pragma once
 #include <vector>
 #include <set>
+#include <iterator>
 
 #include "simbolo.h"
 
@@ -29,11 +30,11 @@ class Alfabeto {
 
   void Sort(void);
   void GetAlpha(void);
+  void GetAlpha(const Alfabeto&);
   void Build(std::string);
   inline int Size(void) {return symbol_.size();}
   //inline Simbolo at(int pos) {return symbol_[pos];}
 
  private:
-  //std::vector<Simbolo> symbol_;
   std::set<Simbolo> symbol_;
 };

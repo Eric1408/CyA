@@ -151,8 +151,8 @@ Cadena::Cadena(std::string input) {
   std::string push;
   length_ = 0;
   for (size_t i = 0; i < input.size(); i++) {
-    push = input[i];
     length_++;
+    push = input[i];
     cadena_.push_back(push);  
   }
 }
