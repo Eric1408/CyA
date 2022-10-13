@@ -16,7 +16,7 @@
 #pragma once
 #include <vector>
 #include <set>
-#include <iterator>
+
 
 #include "simbolo.h"
 

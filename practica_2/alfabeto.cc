@@ -81,9 +81,9 @@ void Alfabeto::Build(std::string input) {
     push = input[i];
     symbol_.insert(push);
   }
-  std::set<Simbolo>::iterator it;
-  for (auto it = symbol_.begin(); it != symbol_.end(); it++) {
-    std::cout << *it;
+  
+  for (auto& str: symbol_) {
+    std::cout << str;
   }
 }
 
