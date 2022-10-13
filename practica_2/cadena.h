@@ -15,6 +15,7 @@
  */
 #pragma once
 #include <fstream>
+#include <vector>
 #include "alfabeto.h"
 
 const int ZERO = 0;
@@ -29,17 +30,20 @@ class Cadena {
   Cadena(void) : length_{0} {}
   Cadena(std::string);
 
-  inline int Length(void) {return length_;}
-  //int Length(void);
-  std::string Reverse(void);
+  std::string Reverse(void) const;
   std::string Reverse(std::string);
+  inline int Length(void) {return length_;}
   void Prefix(std::ofstream&);
   void Suffix(std::ofstream&);
   void Substring(std::ofstream&);
 
+  std::string GetCadena(void) const;
+
+  friend std::ostream& operator<<(std::ostream&, const Cadena&);
+  friend bool operator<(const Cadena&, const Cadena&);
+  
  private:
   int length_;
-  //Alfabeto alpha_;
   std::vector<Simbolo> cadena_;
   std::string cadena_incorrecta;
 };

@@ -25,20 +25,26 @@ void Usage(int argc, char* argv[]) {
  * @param cadenas 
  * @param opcode 
  */
-void Selector(std::ofstream& fileout, Lenguaje& lenguaje, Lenguaje& lenguaje_2, int opcode) {
+void Selector(std::ofstream& fileout, Lenguaje& lenguaje_1, Lenguaje& lenguaje_2, int opcode) {
   switch (opcode) {
   case 1:
-    
+    std::cout << lenguaje_1 * lenguaje_2 << std::endl;
     break;
   case 2:
+    std::cout << lenguaje_1 + lenguaje_2 << std::endl;
     break;
   case 3: 
+    std::cout << lenguaje_1 / lenguaje_2 << std::endl;
     break;
-  case 4: 
+  case 4:
+    std::cout << lenguaje_1 - lenguaje_2 << std::endl; 
     break;
   case 5:
+    lenguaje_1.ReverseLenguage();
+    std::cout << lenguaje_1 << std::endl;
     break;
   case 6:
+    
     break;
   default:
     break;

@@ -14,26 +14,20 @@
  * 
  */
 #pragma once
-#include <vector>
 #include <set>
 
 #include "simbolo.h"
 
-const char SPACE = ' ';
-
 class Alfabeto {
  public:
-  Alfabeto(void) : symbol_{} {}
+  Alfabeto(void) : alpha_symbol_{} {}
   Alfabeto(std::string);
 
-
-  void Sort(void);
-  void GetAlpha(void);
-  void Build(std::string);
-  inline int Size(void) {return symbol_.size();}
-  //inline Simbolo at(int pos) {return symbol_[pos];}
+  void Build(char input);
+  std::string GetAlpha(void) const;
+  inline int Size(void) {return alpha_symbol_.size();}
+  std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
 
  private:
-  //std::vector<Simbolo> symbol_;
-  std::set<Simbolo> symbol_;
+  std::set<Simbolo> alpha_symbol_;
 };

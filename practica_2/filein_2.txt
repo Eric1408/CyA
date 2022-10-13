@@ -1,5 +1,6 @@
-{ d e f } { d def fde eeff }
+{ a b c } { a bca acb aaab }
 { d } { d dd ddd }
 { d e } { }
 { 2 3 } { & }
 { 2 3 } { 2 3 22 23 32 33 }
+{ d e f } { d def fde eeff }

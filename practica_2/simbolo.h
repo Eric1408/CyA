@@ -20,19 +20,16 @@
 
 class Simbolo {
  public:
-  Simbolo(void) : symbol_("") {}
-  Simbolo(std::string input) {symbol_ = input;}
+  Simbolo(void) : symbol_{} {}
+  Simbolo(char input) {symbol_ = input;}
 
-  inline std::string GetSymbol(void) {return symbol_;}
-  inline int SymSize(void) {return symbol_.size();}
-  inline void SetSym(std::string input) {symbol_ = input;}
+  inline char GetSymbol(void) const {return symbol_;}
+  inline void SetSym(char input) {symbol_ = input;}
   
   friend bool operator<(const Simbolo&, const Simbolo&);
   friend std::ostream& operator<<(std::ostream&, const Simbolo&);
 
-  //void Write(std::ostream&) const;
-
  private:
-  std::string symbol_;
+  char symbol_;
 };
 

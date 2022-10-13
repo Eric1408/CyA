@@ -16,5 +16,5 @@ std::ostream& operator<<(std::ostream& out, const Simbolo& sym) {
 }
 
 bool operator<(const Simbolo& operand1, const Simbolo& operand2) {
-  return operand1.symbol_.size() < operand2.symbol_.size();
+  return operand1.symbol_ < operand2.symbol_;
 }

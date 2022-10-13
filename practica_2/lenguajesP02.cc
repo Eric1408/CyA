@@ -37,10 +37,9 @@ int main(int argc, char* argv[]) {
   std::string line_2;
   
   while (getline(filein_1, line) && getline(filein_2, line_2)) {
-    Lenguaje lenguaje(line);
+    Lenguaje lenguaje_1(line);
     Lenguaje lenguaje_2(line_2);
-    Cadena cadenas(line);
-    Selector(fileout, lenguaje, lenguaje_2, opcode);
+    Selector(fileout, lenguaje_1, lenguaje_2, opcode);
   }
 
   return 0;

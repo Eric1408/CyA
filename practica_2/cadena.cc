@@ -41,18 +41,6 @@ void Cadena::Suffix(std::ofstream& out) {
   }
 }
 
-std::string Cadena::Reverse(std::string input) {
-  std::string result;
-  for (int i = input.size() -1; i >= ZERO; --i) { 
-    result += input[i];
-  }
-  if (length_ == -1) {
-    return cadena_incorrecta;
-  }
-
-  return result;
-}
-
 /**
  * @brief Agrega al archivo de salida las subcadenas 
  * 
@@ -79,7 +67,7 @@ void Cadena::Substring(std::ofstream& out) {
  * 
  * @return std::string 
  */
-std::string Cadena::Reverse(void) {
+std::string Cadena::Reverse(void) const {
   std::string result;
   for (int i = length_ -1; i >= ZERO; --i) { 
     result += cadena_[i].GetSymbol();
@@ -91,69 +79,44 @@ std::string Cadena::Reverse(void) {
   return result;
 }
 
-/**
- * @brief Construct a new Cadena:: Cadena object
- * 
- * @param input 
- */
-//Cadena::Cadena(std::string input) {
-//  const int MAX_SIZE = 500;
-//  size_t last_space = input.find_last_of(SPACE);
-//  int size = input.size() - last_space - 1;
-//  std::string cadena = input.substr(last_space + 1, size);
-//  std::string push_symbol;
-//  length_ = 0;
-//
-//  if (last_space != std::string::npos ) {
-//    alpha_.Build(input.substr(ZERO, last_space + 1));
-//    int romper = 0;
-//    int pos{0};
-//    while (cadena.size() > ZERO) {
-//      bool inside = {false};
-//      if (romper == MAX_SIZE) {
-//        cadena_incorrecta = "La cadena es incorrecta [" + input.substr(last_space + 1, size) + ']';
-//        length_ = -1;
-//        cadena_.clear();
-//        break;
-//      }
-//      for (int i = 0; i < alpha_.at(pos).SymSize(); ++i) {
-//        push_symbol += cadena[i];        
-//        if (push_symbol == alpha_.at(pos).GetSymbol()) {
-//          inside = true;
-//          cadena_.push_back(push_symbol);
-//          cadena.erase(ZERO, push_symbol.size());
-//          push_symbol = "";
-//          length_++;
-//        } else {
-//          inside = false;
-//        }
-//      }
-//      if (inside == false) {
-//        ++pos;
-//        push_symbol = "";
-//      }
-//      if (pos == alpha_.Size()) {
-//        pos = 0;
-//      }
-//      romper++;
-//    }
-//  } else {
-//    alpha_.Build(cadena);
-//    for (size_t i = 0; i < cadena.size(); ++i) {
-//      push_symbol = cadena[i];
-//      cadena_.push_back(push_symbol);
-//      length_++;
-//    }
-//  }
-//}
+std::string Cadena::Reverse(std::string input) {
+  std::string result;
+  for (int i = input.size() -1; i >= ZERO; --i) { 
+    result += input[i];
+  }
+  if (length_ == -1) {
+    return cadena_incorrecta;
+  }
+
+  return result;
+}
+
 
 Cadena::Cadena(std::string input) {
-  std::string push;
   length_ = 0;
   for (size_t i = 0; i < input.size(); i++) {
-    push = input[i];
     length_++;
-    cadena_.push_back(push);  
+    cadena_.push_back(input[i]);  
   }
 }
 
+std::ostream& operator<<(std::ostream& out, const Cadena& input) {
+  for (size_t i = 0; i < input.cadena_.size(); ++i) {
+    out << input.cadena_[i];
+  }
+
+  return out;
+}
+
+bool operator<(const Cadena& in_1, const Cadena& in_2) {
+  return in_1.cadena_ < in_2.cadena_;
+}
+
+std::string Cadena::GetCadena(void) const{
+  std::string result;
+    for (size_t i = 0; i < cadena_.size(); ++i) {
+      result += cadena_[i].GetSymbol();
+    }
+
+  return result;
+}
