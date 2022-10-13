@@ -176,3 +176,6 @@ std::string Lenguaje::GetCadenas(void) const  {
 
   return result;
 }
+
+
+//comentario
