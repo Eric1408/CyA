@@ -28,23 +28,27 @@ void Usage(int argc, char* argv[]) {
 void Selector(std::ofstream& fileout, Lenguaje& lenguaje_1, Lenguaje& lenguaje_2, int opcode) {
   switch (opcode) {
   case 1:
-    std::cout << lenguaje_1 * lenguaje_2 << std::endl;
+    fileout << lenguaje_1 * lenguaje_2 << std::endl;
     break;
   case 2:
-    std::cout << lenguaje_1 + lenguaje_2 << std::endl;
+    fileout << lenguaje_1 + lenguaje_2 << std::endl;
     break;
   case 3: 
-    std::cout << lenguaje_1 / lenguaje_2 << std::endl;
+    fileout << lenguaje_1 / lenguaje_2 << std::endl;
     break;
   case 4:
-    std::cout << lenguaje_1 - lenguaje_2 << std::endl; 
+    fileout << lenguaje_1 - lenguaje_2 << std::endl; 
     break;
   case 5:
     lenguaje_1.ReverseLenguage();
-    std::cout << lenguaje_1 << std::endl;
+    fileout << lenguaje_1 << std::endl;
     break;
   case 6:
-    
+    int n;
+    std::cout << "Introduzca la potencia para el lenguaje: " << lenguaje_1 << std::endl;
+    std::cin >> n;
+    n--;
+    fileout << lenguaje_1.PowLenguage(lenguaje_1, n) << std::endl;
     break;
   default:
     break;

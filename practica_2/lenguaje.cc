@@ -144,12 +144,22 @@ void Lenguaje::ReverseLenguage(void) {
 }
 
 Lenguaje Lenguaje::PowLenguage(const Lenguaje& base, int n) {
-  Lenguaje zero;
+  Lenguaje zero = base;
+  if (n == -1) {
+    zero.SetLenguage();
+    return zero;
+  }
   if (n == 0) {
     return zero;
   } else {
     return (base * PowLenguage(base, n-1)); 
   }
+}
+
+void Lenguaje::SetLenguage(void) {
+  std::string in = "&";
+  cadenas_.clear();
+  cadenas_.insert(in);
 }
 
 std::ostream& operator<<(std::ostream& out, const Lenguaje& in) {

@@ -13,10 +13,11 @@ class Lenguaje{
  public:
   Lenguaje(void) : alpha_{}, cadenas_{} {}
   Lenguaje(std::string);
-  ~Lenguaje();
+  //~Lenguaje();
 
-  std::string GetCadenas(void) const;
+  void SetLenguage(void);
   void ReverseLenguage(void);
+  std::string GetCadenas(void) const;
   Lenguaje PowLenguage(const Lenguaje&, int);
 
   friend Lenguaje operator*(const Lenguaje&, const Lenguaje&);
