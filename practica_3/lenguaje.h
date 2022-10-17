@@ -7,6 +7,7 @@
 #include "cadena.h"
 #include "alfabeto.h"
 
+const char COMA = ',';
 const char SPACE = ' ';
 const std::string EMPTYCHAIN = "&";
 
@@ -14,7 +15,6 @@ class Lenguaje{
  public:
   Lenguaje(void) : alpha_{}, cadenas_{} {}
   Lenguaje(std::string);
-  //~Lenguaje();
 
   void SetLenguage(void);
   void ReverseLenguage(void);

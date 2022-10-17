@@ -35,9 +35,17 @@ int main(int argc, char* argv[]) {
 
   std::string line;
   //std::string line_2;
-  
+  int counter;
   while (getline(filein_1, line)) {
-    Lenguaje lenguaje_1(line);
+    int found = line.find("=");
+    if (found != std::string::npos) {
+      std::cout << line << std::endl;
+      counter++;
+      std::cout << counter << std::endl;
+    } else {
+      std::cout << "op\n";
+    }
+    //Lenguaje lenguaje_1(line);
     //Lenguaje lenguaje_2(line_2);
     //Selector(fileout, lenguaje_1, lenguaje_2, opcode);
   }
