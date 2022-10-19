@@ -28,13 +28,13 @@ void Usage(int argc, char* argv[]) {
 void Selector(std::ofstream& fileout, Lenguaje& lenguaje_1, Lenguaje& lenguaje_2, int opcode) {
   switch (opcode) {
   case 1:
-    fileout << lenguaje_1 * lenguaje_2 << std::endl;
-    break;
-  case 2:
     fileout << lenguaje_1 + lenguaje_2 << std::endl;
     break;
+  case 2:
+    fileout << (lenguaje_1 | lenguaje_2) << std::endl;
+    break;
   case 3: 
-    fileout << lenguaje_1 / lenguaje_2 << std::endl;
+    fileout << (lenguaje_1 ^ lenguaje_2) << std::endl;
     break;
   case 4:
     fileout << lenguaje_1 - lenguaje_2 << std::endl; 

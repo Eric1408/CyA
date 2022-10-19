@@ -113,10 +113,10 @@ bool operator<(const Cadena& in_1, const Cadena& in_2) {
 }
 
 std::string Cadena::GetCadena(void) const{
-  std::string result;
-    for (size_t i = 0; i < cadena_.size(); ++i) {
-      result += cadena_[i].GetSymbol();
-    }
+  std::string result = "";
+  for (size_t i = 0; i < cadena_.size(); ++i) {
+    result += cadena_[i].GetSymbol();
+  }
 
   return result;
 }

@@ -21,7 +21,9 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <map>
 
+#include "notacion_polaca.h"
 #include "lenguaje.h"
 #include "cadena.h"
 #include "usage.h"
@@ -29,26 +31,31 @@
 int main(int argc, char* argv[]) {
   Usage(argc, argv);
   std::ifstream filein_1{argv[1]};
-  //std::ifstream filein_2{argv[2]};
-  //std::ofstream fileout{argv[3]};
-  //int opcode = atoi(argv[4]);
+  std::map<std::string, Lenguaje> map_lenguaje;
 
   std::string line;
-  //std::string line_2;
-  int counter;
+  std::string name;
+
   while (getline(filein_1, line)) {
-    int found = line.find("=");
+    size_t found = line.find("=");
     if (found != std::string::npos) {
-      std::cout << line << std::endl;
-      counter++;
-      std::cout << counter << std::endl;
+      Lenguaje lenguaje(line);
+      
+      for (size_t i = 0; i < line.size(); ++i) {
+        if (line[i] != SPACE) {
+          name += line[i];
+        } else {
+          map_lenguaje[name] = lenguaje;
+          name.clear();
+          break;
+        }
+      }
     } else {
-      std::cout << "op\n";
+      CalculatorRPN(line, map_lenguaje);
     }
-    //Lenguaje lenguaje_1(line);
-    //Lenguaje lenguaje_2(line_2);
-    //Selector(fileout, lenguaje_1, lenguaje_2, opcode);
   }
+
+
 
   return 0;
 }

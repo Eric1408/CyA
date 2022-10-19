@@ -18,6 +18,8 @@
 
 #include "simbolo.h"
 
+const char EMPTYCHAIN = '&';
+
 class Alfabeto {
  public:
   Alfabeto(void) : alpha_symbol_{} {}

@@ -10,11 +10,15 @@ std::string Alfabeto::GetAlpha(void) const {
     result.push_back(str.GetSymbol());
     result += " ";
   }
+  if (result.size() >= 2) {
+    result.pop_back();
+  }
 
   return result;
 }
 
 void Alfabeto::Build(char input) {
-  alpha_symbol_.insert(input);
+  if (input != EMPTYCHAIN)
+    alpha_symbol_.insert(input);
 }
 

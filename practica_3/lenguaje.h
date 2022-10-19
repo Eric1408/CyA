@@ -9,7 +9,7 @@
 
 const char COMA = ',';
 const char SPACE = ' ';
-const std::string EMPTYCHAIN = "&";
+const std::string EMPTYSTR = "&";
 
 class Lenguaje{
  public:
@@ -21,9 +21,9 @@ class Lenguaje{
   std::string GetCadenas(void) const;
   Lenguaje PowLenguage(const Lenguaje&, int);
 
-  friend Lenguaje operator*(const Lenguaje&, const Lenguaje&);
   friend Lenguaje operator+(const Lenguaje&, const Lenguaje&);
-  friend Lenguaje operator/(const Lenguaje&, const Lenguaje&);
+  friend Lenguaje operator|(const Lenguaje&, const Lenguaje&);
+  friend Lenguaje operator^(const Lenguaje&, const Lenguaje&);
   friend Lenguaje operator-(const Lenguaje&, const Lenguaje&);
   friend std::ostream& operator<<(std::ostream&, const Lenguaje&);
 
