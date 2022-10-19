@@ -1,7 +1,17 @@
 #include "notacion_polaca.h"
 
+bool IsNumber(const std::string& input) {
+  for (char const &chr : input) {
+    if (std::isdigit(chr) == 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 void CalculatorRPN(std::string input, std::map<std::string, Lenguaje> lenguajes_map) {
-  std::stack<std::string> operar;
+  std::stack<int> n;
   std::stack<Lenguaje> lenguaje_stack;
 
 
@@ -22,9 +32,14 @@ void CalculatorRPN(std::string input, std::map<std::string, Lenguaje> lenguajes_
   int i = 0;
   while (i < entrada.size()) {
     if (entrada[i] != "+" && entrada[i] != "|" && entrada[i] != "^" && entrada[i] != "-" && entrada[i] != "!" && entrada[i] != "*") {
-      lenguaje_stack.push(lenguajes_map[entrada[i]]);
+      if (IsNumber(entrada[i])) {
+        n.push(stoi(entrada[i]));
+      } else {
+        lenguaje_stack.push(lenguajes_map[entrada[i]]);
+      }
+
     } else {
-      if (entrada[i] == "!" && entrada[i] == "*") {
+      if (entrada[i] == "!") {
         if (lenguaje_stack.size() < 1) {
           std::cout << "ERROR: operandos insuficientes en la operacion\n";
         } else {
@@ -33,19 +48,25 @@ void CalculatorRPN(std::string input, std::map<std::string, Lenguaje> lenguajes_
           if (entrada[i] == "!") {
             op1.ReverseLenguage();
             lenguaje_stack.push(op1);
-          } else {
-            //aqui va la potencia
-          }
+          } 
         }
       } else {
         if (lenguaje_stack.size() < 2) {
           std::cout << "ERROR: operandos insuficientes en la operacion\n";
         } else {
-          op1 = lenguaje_stack.top();
-          lenguaje_stack.pop();
+          if (entrada[i] == "*") {
+            op1 = lenguaje_stack.top();
+            lenguaje_stack.pop();
 
-          op2 = lenguaje_stack.top();
-          lenguaje_stack.pop();
+            lenguaje_stack.push(op1.PowLenguage(op1, n.top()));
+            n.pop();
+          } else {
+            op1 = lenguaje_stack.top();
+            lenguaje_stack.pop();
+
+            op2 = lenguaje_stack.top();
+            lenguaje_stack.pop();
+          }
 
           if (entrada[i] == "+") {
             lenguaje_stack.push(op1 + op2);

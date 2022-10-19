@@ -19,24 +19,24 @@ Lenguaje::Lenguaje(std::string input) {
 
 Lenguaje operator+(const Lenguaje& in1, const Lenguaje& in2) {
   std::string concatenated = {"{"};
-  bool detected_empty = false;
+  //bool detected_empty = false;
 
   for (auto& str : in1.cadenas_) {
     for (auto& str2 : in2.cadenas_) {
-      if (str.GetCadena() != EMPTYSTR) {
+      //if (str.GetCadena() != EMPTYSTR) {
         concatenated += str.GetCadena() + ", ";
-      } else if (str2.GetCadena() != EMPTYSTR) {
+      //} else if (str2.GetCadena() != EMPTYSTR) {
         concatenated += str2.GetCadena() + ", ";
-      } else {
-        detected_empty = true;
-      }
+      //} else {
+      //  detected_empty = true;
+      //}
       
     }
   } 
   
-  if (detected_empty) {
-    concatenated += "&";
-  }
+  //if (detected_empty) {
+  //  concatenated += "&";
+  //}
 
   if (concatenated.size() >= 2) {
     concatenated.pop_back();
