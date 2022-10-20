@@ -1,5 +1,8 @@
 #include "notacion_polaca.h"
 
+/**
+ * @brief Funcion que detecta si es un numero pasado un string
+*/
 bool IsNumber(const std::string& input) {
   for (char const &chr : input) {
     if (std::isdigit(chr) == 0) {
@@ -10,6 +13,11 @@ bool IsNumber(const std::string& input) {
   return true;
 }
 
+/**
+ * @brief Funcion que desarolla operaciones en notacion posfija mediante el uso de la pila
+ * @param string 
+ * @param map<string, Lenguaje>
+*/
 void CalculatorRPN(std::string input, std::map<std::string, Lenguaje> lenguajes_map) {
   std::stack<int> n;
   std::stack<Lenguaje> lenguaje_stack;

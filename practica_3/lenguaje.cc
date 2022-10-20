@@ -1,5 +1,8 @@
 #include "lenguaje.h"
 
+/**
+ * @brief constructor de la clase Lenguaje
+*/
 Lenguaje::Lenguaje(std::string input) {
   int found = input.find("{");
   input.erase(ZERO, found + 1);
@@ -17,6 +20,10 @@ Lenguaje::Lenguaje(std::string input) {
   } 
 }
 
+
+/**
+ * @overload operator +
+*/
 Lenguaje operator+(const Lenguaje& in1, const Lenguaje& in2) {
   std::string concatenated = {"{"};
   
@@ -45,6 +52,9 @@ Lenguaje operator+(const Lenguaje& in1, const Lenguaje& in2) {
   return result;
 }
 
+/**
+ * @overload operator |
+*/
 Lenguaje operator|(const Lenguaje& in1, const Lenguaje& in2) {
   std::string concatenated = {"{"};
   bool detected_empty = false;
@@ -82,6 +92,9 @@ Lenguaje operator|(const Lenguaje& in1, const Lenguaje& in2) {
   return result;
 }
 
+/**
+ * @overload operator ^
+*/
 Lenguaje operator^(const Lenguaje& in1, const Lenguaje& in2) {
   std::string concatenated = {"{"};
   for (auto& str : in1.cadenas_) {
@@ -105,6 +118,9 @@ Lenguaje operator^(const Lenguaje& in1, const Lenguaje& in2) {
   return result;
 }
 
+/**
+ * @overload operator -
+*/
 Lenguaje operator-(const Lenguaje& in1, const Lenguaje& in2) {
   std::string concatenated = {"{"};
   for (auto& str : in1.cadenas_) {
@@ -126,6 +142,9 @@ Lenguaje operator-(const Lenguaje& in1, const Lenguaje& in2) {
   return result;
 }
 
+/**
+ * @brief Metodo para que el Lenguaje tenga todas sus cadenas invertidas
+*/
 void Lenguaje::ReverseLenguage(void) {
   std::vector<std::string> aux;
 
@@ -136,9 +155,14 @@ void Lenguaje::ReverseLenguage(void) {
   for (size_t i = 0; i < aux.size(); ++i) {
     cadenas_.insert(aux[i]);
   }
-
 }
 
+/**
+ * @brief Metodo para la potencia de un lenguaje
+ * @param Lenguaje
+ * @param int
+ * @return Lenguaje
+*/
 Lenguaje Lenguaje::PowLenguage(const Lenguaje& base, int n) {
   Lenguaje zero = base;
   if (n == -1) {
@@ -152,18 +176,28 @@ Lenguaje Lenguaje::PowLenguage(const Lenguaje& base, int n) {
   }
 }
 
+/**
+ * @brief Metodo para vaciar un lenguaje y colocar la cadena vacia
+*/
 void Lenguaje::SetLenguage(void) {
   std::string in = "&";
   cadenas_.clear();
   cadenas_.insert(in);
 }
 
+/**
+ * @overload operator <<
+*/
 std::ostream& operator<<(std::ostream& out, const Lenguaje& in) {
   out << "{" << in.alpha_.GetAlpha() << "} " << "{" << in.GetCadenas() << "}";
 
   return out;
 }
 
+/**
+ * @brief Metodo par a obtener todas las cadenas de un Lenguaje
+ * @return string
+*/
 std::string Lenguaje::GetCadenas(void) const  {
   std::string result;
   for (auto& str : cadenas_) {
