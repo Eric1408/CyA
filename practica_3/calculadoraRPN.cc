@@ -5,9 +5,9 @@
  * Grado en Ingenieria Informatica
  * Curso: 2do
  * @category Computabilidad y Algoritmia
- * @file p01_strings_main.cc
+ * @file calculadoraRPN.cc
  * @author Eric Angueta Rogel || alu0101335339@ull.edu.es
- * @brief p01_strings_main.cc: programa cliente.
+ * @brief calculadoraRPN.cc: programa cliente.
  *        Contiene la funcion main del proyecto que usa las clases cadena.h alfabeto.h y simbolo.h
  *        para hacer operaciones con las cadenas dadas a partir de un fichero.
  * @version 0.1
@@ -54,8 +54,6 @@ int main(int argc, char* argv[]) {
       CalculatorRPN(line, map_lenguaje);
     }
   }
-
-
 
   return 0;
 }

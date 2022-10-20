@@ -79,6 +79,9 @@ std::string Cadena::Reverse(void) const {
   return result;
 }
 
+/**
+ * @brief 
+*/
 std::string Cadena::Reverse(std::string input) {
   std::string result;
   for (int i = input.size() -1; i >= ZERO; --i) { 

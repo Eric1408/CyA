@@ -17,6 +17,9 @@ std::string Alfabeto::GetAlpha(void) const {
   return result;
 }
 
+/**
+ * @brief Metodo que es una especie de constructor de alfabeto
+*/
 void Alfabeto::Build(char input) {
   if (input != EMPTYCHAIN)
     alpha_symbol_.insert(input);

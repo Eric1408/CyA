@@ -19,24 +19,18 @@ Lenguaje::Lenguaje(std::string input) {
 
 Lenguaje operator+(const Lenguaje& in1, const Lenguaje& in2) {
   std::string concatenated = {"{"};
-  //bool detected_empty = false;
-
+  
   for (auto& str : in1.cadenas_) {
     for (auto& str2 : in2.cadenas_) {
-      //if (str.GetCadena() != EMPTYSTR) {
-        concatenated += str.GetCadena() + ", ";
-      //} else if (str2.GetCadena() != EMPTYSTR) {
-        concatenated += str2.GetCadena() + ", ";
-      //} else {
-      //  detected_empty = true;
-      //}
-      
+      if (str.GetCadena() != EMPTYSTR) {
+        concatenated += str.GetCadena();
+      }
+      if (str2.GetCadena() != EMPTYSTR) {
+        concatenated += str2.GetCadena();
+      }
+      concatenated += ", ";
     }
   } 
-  
-  //if (detected_empty) {
-  //  concatenated += "&";
-  //}
 
   if (concatenated.size() >= 2) {
     concatenated.pop_back();
@@ -134,6 +128,7 @@ Lenguaje operator-(const Lenguaje& in1, const Lenguaje& in2) {
 
 void Lenguaje::ReverseLenguage(void) {
   std::vector<std::string> aux;
+
   for (auto& str : cadenas_) {
     aux.push_back(str.Reverse());
   }
