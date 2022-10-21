@@ -22,7 +22,6 @@ void CalculatorRPN(std::string input, std::map<std::string, Lenguaje> lenguajes_
   std::stack<int> n;
   std::stack<Lenguaje> lenguaje_stack;
 
-
   std::vector<std::string> entrada;
   Lenguaje op1, op2;
   std::string push;
