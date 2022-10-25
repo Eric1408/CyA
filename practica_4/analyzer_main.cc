@@ -1,3 +1,16 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingenieria y Tecnologia
+ * Informatica Basica
+ *
+ * @author Eric Angueta
+ * @date 23. oct .2022
+ * @brief Ejercicios Informatica Basica
+ * Version 1: Funcion factorial
+ *
+ * @see 
+ */
+
 #include <iostream>
 #include <fstream>
 #include <string>
