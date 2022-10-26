@@ -6,6 +6,7 @@
 
 class Analyzer{
  public:
+  void Var();
 
  private:
   std::string code;

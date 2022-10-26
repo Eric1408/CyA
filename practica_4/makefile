@@ -4,7 +4,7 @@ LDFLAGS =
 
 all: p04_code_analyzer
 
-p04_code_analyzer: analyzer.o analyzer_main.o
+p04_code_analyzer: analyzer.o var.o analyzer_main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean
