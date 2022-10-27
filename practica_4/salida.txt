@@ -1,0 +1,31 @@
+PROGRAM : code.cc
+DESCRIPTION :
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingenieria y Tecnologia
+ * Informatica Basica
+ *
+ * @author F. de Sande
+ * @date 23. nov .2020
+ * @brief Ejercicios Informatica Basica
+ * Version 1: Funcion factorial
+ *
+ * @see https :// github .com/IB -2022 -2023/ IB -class -code - examples /
+ */
+
+VARIABLES :
+[LINE 28] INT: factorial = 1
+[LINE 39] INT: limit
+[LINE 40] DOUBLE: dlimit
+
+STATEMENTS :
+[LINE 29] LOOP: for
+[LINE 42] LOOP: for
+
+MAIN :
+True
+
+COMMENTS
+[LINE 1-12] DESCRIPTION
+[LINE 17] // Returns the factorial of the argument
+[LINE 37] // Returns the factorial of the argument 2

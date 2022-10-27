@@ -21,6 +21,10 @@ int Factorial (int number ) {
     case 1:
       return 1;
     default :
+      /*
+      comentario multilinea
+      xfavor aceptalo 
+      */
       int factorial = 1;
       for (int i = 1; i <= number ; ++ i ) {
         factorial *= i ;
@@ -28,9 +32,11 @@ int Factorial (int number ) {
       return factorial ;
   }
 }
+
 int main () {
+  // Returns the factorial of the argument 2
   std :: cout << " Introduzca el numero de factoriales a calcular : ";
-  int limit ;
+  int limit ; //coment
   double dlimit ;
   std :: cin >> limit ;
   for (int i = 1; i <= limit ; ++ i ) {

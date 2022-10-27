@@ -14,26 +14,25 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <regex>
 
 #include "analyzer.h"
 
 int main(int argc, char* argv[]) {
+  int position = 0;
   std::string name{argv[1]};
+  std::string out_name{argv[2]};
   std::ifstream code{name};
+  std::ofstream fileout{out_name};
+
   std::string lines;
-  std::string saved_code;
-  std::regex expression("int\\s(\\w+)");
-  std::smatch matches;
-  
+
+  Analyzer analy;
+  fileout << "PROGRAM : " << name << std::endl;
   while (getline(code, lines)) {
-    saved_code += lines;
-    for (auto match : matches) {
-      std::cout << match << " ";
-    }
-    std::cout << std::endl;
+    position++;
+    analy.Build(lines, position);
   }
-  std::regex_search(saved_code, matches, expression);
+  fileout << analy;
 
   return 0;
 }

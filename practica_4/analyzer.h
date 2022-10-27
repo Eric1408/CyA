@@ -1,16 +1,31 @@
 #pragma once
 
 #include <iostream>
-#include <regex>
 #include <string>
+#include <vector>
+#include <regex>
+
+#include "var.h"
+#include "loop.h"
+#include "comment.h"
+#include "description.h"
 
 class Analyzer{
  public:
-  void Var(void); // variables de tipo int y double
-  void Loop(void); //deteccion de bucles for y while, numero de bucles de cada tipo, y en la linea encontrada
-  void Main(void);
-  void Comments(void);
-  
+  Analyzer(void) : variables_{}, loops_{}, main_{}, descript_{} {}
+
+  void Build(std::string, int);
+
+  inline int LoopSize(void) const {return loops_.size();}
+  inline int VarSize(void) const {return variables_.size();}
+  inline int CommentSize(void) const {return comments_.size();}
+
+  friend std::ostream& operator<<(std::ostream& out, const Analyzer&);
+
  private:
-  std::string code;
+  bool main_;  
+  Description descript_;
+  std::vector<Loop> loops_;
+  std::vector<Var> variables_;
+  std::vector<Comment> comments_;
 };
