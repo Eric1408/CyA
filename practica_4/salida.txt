@@ -25,7 +25,7 @@ STATEMENTS :
 MAIN :
 True
 
-COMMENTS
+COMMENTS :
 [LINE 1-12] DESCRIPTION
 [LINE 17] // Returns the factorial of the argument
 [LINE 37] // Returns the factorial of the argument 2

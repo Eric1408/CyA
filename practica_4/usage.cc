@@ -8,7 +8,7 @@
  */
 void Usage(int argc, char* argv[]) {
   std::string help = argv[1];
-  if ((argc < 2 || argc > 2) && help != "--help") {
+  if ((argc < 3 || argc > 3) && help != "--help") {
     std::cout << kHelp;
     exit(EXIT_SUCCESS);
   } 

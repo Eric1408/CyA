@@ -1,14 +1,18 @@
 /**
+ * 
  * Universidad de La Laguna
  * Escuela Superior de Ingenieria y Tecnologia
- * Informatica Basica
- *
- * @author Eric Angueta
- * @date 23. oct .2022
- * @brief Ejercicios Informatica Basica
- * Version 1: Funcion factorial
- *
- * @see 
+ * Grado en Ingenieria Informatica
+ * Curso: 2do
+ * @category Computabilidad y Algoritmia
+ * @file analyzer_main.cc
+ * @brief Programa principal donde hace la llamada al analizador de codigo
+ * @author Eric Angueta Rogel || alu0101335339@ull.edu.es
+ * @version 0.1
+ * @date 2022-10-27
+ * 
+ * @copyright Copyright (c) 2022
+ * 
  */
 
 #include <iostream>
@@ -16,8 +20,10 @@
 #include <string>
 
 #include "analyzer.h"
+#include "usage.h"
 
 int main(int argc, char* argv[]) {
+  Usage(argc, argv);
   int position = 0;
   std::string name{argv[1]};
   std::string out_name{argv[2]};

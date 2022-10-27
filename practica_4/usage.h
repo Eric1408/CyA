@@ -22,7 +22,8 @@
 
 
 const std::string kExplain  {"El modo de uso de este programa es el siguiente:\n"
-                          "./CalculadoraRPN <entrada.txt> "};
-const std::string kHelp {"./lenguajesP02: faltan o se ha pasado del numero de argumentos.\n"
-                          "Pruebe './CalculadoraRPN --help' para mas informacion\n"};
+                          "./CalculadoraRPN <entrada.txt> <salida.txt>\n"
+                          "Este programa analiza codigo distinguiento entre bucles, variables, comentarios y funcion principal\n"};
+const std::string kHelp {"./p04_code_analyzer: faltan o se ha pasado del numero de argumentos.\n"
+                          "Pruebe './p04_code_analyzer --help' para mas informacion\n"};
 void Usage(int, char*[]);
