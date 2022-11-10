@@ -12,7 +12,7 @@ class Estado {
  public:
   Estado(void) : final_{0}, transitions_{0}, next_{} {}  
   Estado(std::string);
-  //inline bool IsAcepted(void) const {final_ == 1 ? true : false;}
+  inline bool IsAcepted(void) const {return final_ == 1 ? true : false;}
   std::map<Simbolo, int> GetMap(void) const {return next_;}
 
   inline int GetNext(const Simbolo& i) const {return next_.at(i);}

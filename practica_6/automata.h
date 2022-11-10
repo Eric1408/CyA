@@ -22,7 +22,7 @@ class Automata {
   inline Estado GetEstados(int i) const {return states_.at(i);}
   inline int GetTotalStates(void) const {return total_states_;}
 
-
+  bool CheckString(std::string) const;
 
  private:
   Alfabeto alpha_;
