@@ -1,3 +1,20 @@
+/**
+ * 
+ * Universidad de La Laguna
+ * Escuela Superior de Ingenieria y Tecnologia
+ * Grado en Ingenieria Informatica
+ * Curso: 2do
+ * @category Computabilidad y Algoritmia
+ * @file automata_main.cc
+ * @brief Fcihero que main que contiene las clase automata para generar uno 
+ * @author Eric Angueta Rogel || alu0101335339@ull.edu.es
+ * @version 0.1
+ * @date 2022-09-29
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -19,10 +36,5 @@ int main(int argc, char* argv[]) {
       std::cout << lines << " --- Rejected\n";
     }
   }
-  //for (int i = 0; i < autom.GetTotalStates(); ++i) {
-  //  std::cout << "Desde " << i << " transiciona ";
-  //  std::cout << autom.GetEstados(i);
-  //}
-  
   return 0;
 }

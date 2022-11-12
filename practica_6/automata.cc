@@ -1,5 +1,8 @@
 #include "automata.h"
 
+/**
+ * @brief Constructor Automota
+*/
 Automata::Automata(std::ifstream& in) {
   std::string lines;
   int counter = 0;
@@ -34,6 +37,9 @@ Automata::Automata(std::ifstream& in) {
   }
 }
 
+/**
+ * @brief Comprueba si los Simbolos pertenece al Alfabeto
+*/
 void Automata::CheckSymbol(const Estado& input) {
   for (auto const& it : input.GetMap()) {
     if (!Belong(it.first.GetSymbol())) {
@@ -44,6 +50,10 @@ void Automata::CheckSymbol(const Estado& input) {
   }
 }
 
+
+/**
+ * @brief Comprueba si un Simbolo pertenece al Alfabeto
+*/
 bool Automata::Belong(const Simbolo& input) {
   for (auto const& str : alpha_.GetSetAlpha()) {
     if (str.GetSymbol() == input.GetSymbol()) {
@@ -53,3 +63,24 @@ bool Automata::Belong(const Simbolo& input) {
   
   return false;
 }
+
+/**
+ * @brief Comprueba si la cadena es aceptada o rechazada por el automata
+*/
+bool Automata::CheckString(std::string input) const {
+  int node = init_;
+  for (char it_c : input) {
+    if (states_.at(node).Check(Simbolo(it_c))) {
+      node = states_.at(node).GetNext(Simbolo(it_c));
+    } else {
+      return false;
+    }
+  } 
+
+  if (states_.at(node).IsAcepted()) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
