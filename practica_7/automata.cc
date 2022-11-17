@@ -84,3 +84,12 @@ bool Automata::CheckString(std::string input) const {
   }
 }
 
+
+std::vector<int> Automata::GetIndexState(void) {
+  std::vector<int> result;
+  for (auto& it: states_) {
+    result.push_back(it.first);
+  }
+
+  return result;
+}

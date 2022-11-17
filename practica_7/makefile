@@ -4,7 +4,7 @@ LDFLAGS =
 
 all: dfa2grammar
 
-dfa2grammar: usage.o automata.o estado.o alfabeto.o simbolo.o automata_main.o
+dfa2grammar: usage.o automata.o estado.o alfabeto.o simbolo.o gramar.o grammar_main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean

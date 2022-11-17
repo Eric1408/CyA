@@ -35,9 +35,15 @@ class Automata {
   void CheckSymbol(const Estado&);
 
   //Getters
+  inline int AlphaSize(void) {return alpha_.Size();}
+  inline int GetEstdoSize(void) const {return total_states_;}
   inline Estado GetEstados(int i) const {return states_.at(i);}
   inline int GetTotalStates(void) const {return total_states_;}
+  inline std::set<Simbolo> GetSimbolos(void) {return alpha_.GetSetAlpha();}
+  inline int GetInit(void) {return init_;}
 
+  std::vector<int> GetIndexState(void);
+  
   bool CheckString(std::string) const;
 
  private:
