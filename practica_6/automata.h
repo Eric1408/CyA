@@ -18,8 +18,6 @@
 
 #include <string>
 #include <fstream>
-#include <vector>
-#include <set>
 #include <map>
 
 #include "alfabeto.h"
@@ -45,5 +43,5 @@ class Automata {
   int total_states_;
   int init_;
   std::map<int, Estado> states_;
-
+  
 };

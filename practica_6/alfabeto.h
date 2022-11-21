@@ -28,7 +28,7 @@ class Alfabeto {
   void Build(char input);
   std::string GetAlpha(void) const;
   inline int Size(void) {return alpha_symbol_.size();}
-  std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
+  inline std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
 
  private:
   std::set<Simbolo> alpha_symbol_;

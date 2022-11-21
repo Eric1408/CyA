@@ -21,25 +21,28 @@
 #include <map>
 
 #include "simbolo.h"
+#include "transiciones.h"
+
 
 /**
  * @class Estado
 */
 class Estado {
  public:
-  Estado(void) : final_{0}, transitions_{0}, next_{} {}  
+  Estado(void) : final_{0}, total_transitions_{0}, next_{} {}  
   Estado(std::string);
   
   inline bool IsAcepted(void) const {return final_ == 1 ? true : false;}
-  inline std::map<Simbolo, int> GetMap(void) const {return next_;}
   inline int GetNext(const Simbolo& i) const {return next_.at(i);}
   
   bool Check(const Simbolo&) const ;
   friend std::ostream& operator<<(std::ostream&, const Estado&);
 
  private:
+  int label_;
   int final_;
-  int transitions_;
+  int total_transitions_;
+  Transicion transitions_;
   std::map<Simbolo, int> next_;
 };
 

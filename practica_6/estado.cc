@@ -5,10 +5,10 @@
 */
 Estado::Estado(std::string input) {
   final_ = input[0] - '0';
-  transitions_ = input[2] - '0';
+  total_transitions_ = input[2] - '0';
   input.erase(0, 4);
 
-  for (int i = 0; i < transitions_; ++i) {
+  for (int i = 0; i < total_transitions_; ++i) {
     next_[Simbolo(input[0])] = input[2] - '0';
     input.erase(0, 4);
   }
