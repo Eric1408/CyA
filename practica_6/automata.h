@@ -18,30 +18,40 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
 #include <map>
 
 #include "alfabeto.h"
 #include "estado.h"
 #include "simbolo.h"
+#include "transiciones.h"
+
+typedef std::vector<Transicion> vec_transition; 
 
 class Automata {
  public:
   Automata(std::ifstream&);
   
   //Checkeo de simbolos
-  bool Belong(const Simbolo&);
-  void CheckSymbol(const Estado&);
+  bool CheckSymbol(const Simbolo&); 
+  //Checkeo de la cadena
+  bool CheckString(std::string) const;
 
   //Getters
-  inline Estado GetEstados(int i) const {return states_.at(i);}
-  inline int GetTotalStates(void) const {return total_states_;}
-
-  bool CheckString(std::string) const;
+  inline int StateSize(void) const { return total_states_; }
+  inline Estado GetState(int i) const { return states_.at(i); }
+  inline int TransitionSize(int i) const { return transitions_.at(i).size(); }
+  inline Transicion GetTransition(int i, int j) const { return transitions_.at(i)[j]; }
 
  private:
   Alfabeto alpha_;
   int total_states_;
-  int init_;
-  std::map<int, Estado> states_;
+  int start_;
   
+  //maps de Estados el nombre lo alberga maps
+  std::map<int, Estado> states_;
+  std::map<int, vec_transition> transitions_;
+  //vector de Estados el nombre lo alberga Estados
+  //std::vector<Estado> estados_; 
+
 };

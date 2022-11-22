@@ -4,7 +4,7 @@ LDFLAGS =
 
 all: p06_automata_simulator
 
-p06_automata_simulator: usage.o automata.o estado.o alfabeto.o simbolo.o automata_main.o
+p06_automata_simulator: usage.o simbolo.o alfabeto.o estado.o transiciones.o automata.o automata_main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean

@@ -18,31 +18,31 @@
 
 #include <iostream>
 #include <string>
-#include <map>
 
 #include "simbolo.h"
-#include "transiciones.h"
 
-
-/**
- * @class Estado
-*/
 class Estado {
  public:
-  Estado(void) : final_{0}, total_transitions_{0}, next_{} {}  
+  Estado(void) : name_{0}, final_{0}, total_transitions_{0} {}
   Estado(std::string);
   
-  inline bool IsAcepted(void) const {return final_ == 1 ? true : false;}
-  inline int GetNext(const Simbolo& i) const {return next_.at(i);}
+  inline bool IsAcepted(void) const { return final_ == 1 ? true : false; }
+  
+  // Getters
+  inline int GetName(void) const { return name_; }
+  inline int GetFinal(void) const { return final_; }
+  inline int GetTransitions(void) const { return total_transitions_; }
+  //inline int GetNext(const Simbolo& i) const {return next_.at(i);}
   
   bool Check(const Simbolo&) const ;
   friend std::ostream& operator<<(std::ostream&, const Estado&);
 
  private:
-  int label_;
+  int name_;
   int final_;
   int total_transitions_;
-  Transicion transitions_;
-  std::map<Simbolo, int> next_;
+
+  //Transicion transitions_;
+  //std::map<Simbolo, int> next_;
 };
 

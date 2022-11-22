@@ -1,16 +1,19 @@
 #pragma once
 
 #include <iostream>
-#include <map>
-#include <string>
 
 #include "simbolo.h"
-#include "estado.h"
 
 class Transicion {
  public:
+  Transicion(std::string);
+
+  // Getters
+  inline Simbolo GetSymbol(void) const { return symbol_; }
+  inline int GetNext(void) const { return next_; }
   
  private:
-  std::map<Simbolo,Estado> next_;
-
+  Simbolo symbol_;
+  int next_;
+  //std::map<Simbolo, int> next_;
 };

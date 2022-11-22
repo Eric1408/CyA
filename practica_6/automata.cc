@@ -17,14 +17,25 @@ Automata::Automata(std::ifstream& in) {
       counter++;
       break;
     case 2:
-      init_ = stoi(lines);
+      start_ = stoi(lines);
       counter++;
       break;
     default:
+      std::string original_lines = lines;
       int index = lines[0] - '0';
-      lines.erase(0, 2);
-      //states_[index] = Estado(lines);
-      //CheckSymbol(states_[index]);
+      states_[index] = Estado(lines);
+      lines.erase(0, 6);
+
+      std::string aux;
+      for (int i = 0; i < states_[index].GetTransitions(); i++) {
+        aux = lines.substr(0,4);
+        transitions_[index].push_back(aux);
+        if (!CheckSymbol(transitions_[index][i].GetSymbol())) {
+          std::cerr << "El simbolo " << transitions_[index][i].GetSymbol() << " no pertenece al alfabeto\n";
+          exit(EXIT_SUCCESS);
+        }
+        lines.erase(0,4);
+      }
       counter++;
       break;
     }
@@ -40,42 +51,28 @@ Automata::Automata(std::ifstream& in) {
 /**
  * @brief Comprueba si los Simbolos pertenece al Alfabeto
 */
-//void Automata::CheckSymbol(const Estado& input) {
-//  for (auto const& it : input.GetMap()) {
-//    if (!Belong(it.first.GetSymbol())) {
-//      std::cout << "El simbolo: " << it.first.GetSymbol() << " no pertenece al alfabeto:\n";
-//      std::cout << alpha_.GetAlpha() << std::endl;
-//      exit(EXIT_FAILURE); 
-//    }    
-//  }
-//}
+bool Automata::CheckSymbol(const Simbolo& input) {
+  for (auto const& str : alpha_.GetSetAlpha()) {
+    if (str.GetSymbol() == input.GetSymbol()) {
+      return true;
+    }
+  }
 
-
-/**
- * @brief Comprueba si un Simbolo pertenece al Alfabeto
-*/
-//bool Automata::Belong(const Simbolo& input) {
-//  for (auto const& str : alpha_.GetSetAlpha()) {
-//    if (str.GetSymbol() == input.GetSymbol()) {
-//      return true;
-//    }
-//  }
-//  
-//  return false;
-//}
+  return false;
+}
 
 /**
  * @brief Comprueba si la cadena es aceptada o rechazada por el automata
 */
 bool Automata::CheckString(std::string input) const {
-  int node = init_;
-  for (char it_c : input) {
-    if (states_.at(node).Check(Simbolo(it_c))) {
-      node = states_.at(node).GetNext(Simbolo(it_c));
-    } else {
-      return false;
-    }
-  } 
+  int node = start_ ;
+  //for (char it_c : input) {
+  //  if (states_.at(node).Check(Simbolo(it_c))) {
+  //    node = states_.at(node).GetNext(Simbolo(it_c));
+  //  } else {
+  //    return false;
+  //  }
+  //} 
 
   if (states_.at(node).IsAcepted()) {
     return true;
