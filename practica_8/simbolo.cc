@@ -5,10 +5,6 @@
  * 
  * @param os 
  */
-//void Simbolo::Write(std::ostream& os) const {
-//  os << symbol_;
-//}
-
 std::ostream& operator<<(std::ostream& out, const Simbolo& sym) {
   out << sym.symbol_;
   
@@ -17,4 +13,8 @@ std::ostream& operator<<(std::ostream& out, const Simbolo& sym) {
 
 bool operator<(const Simbolo& operand1, const Simbolo& operand2) {
   return operand1.symbol_ < operand2.symbol_;
+}
+
+bool operator!=(const Simbolo& in_1, const Simbolo& in_2) {
+  return in_1.GetSymbol() != in_2.GetSymbol();
 }

@@ -11,23 +11,6 @@ Alfabeto::Alfabeto(std::string in) {
 }
 
 /**
- * @brief Metodo para obtener el alfabeto
- * 
- */
-std::string Alfabeto::GetAlpha(void) const {
-  std::string result{""};
-  for (auto& str: alpha_symbol_) {
-    result.push_back(str.GetSymbol());
-    result += " ";
-  }
-  if (result.size() >= 2) {
-    result.pop_back();
-  }
-
-  return result;
-}
-
-/**
  * @brief Metodo que es una especie de constructor de alfabeto
 */
 void Alfabeto::Insert(char input) {
@@ -41,4 +24,17 @@ std::ostream& operator<<(std::ostream& out, const Alfabeto& input) {
   }
   
   return out;
+}
+
+Alfabeto operator+(const Alfabeto& sum1, const Alfabeto& sum2) {
+  Alfabeto result;
+  for (auto const& str : sum1.alpha_symbol_) {
+   result.Insert(str.GetSymbol()); 
+  }
+
+  for (auto const& str : sum2.alpha_symbol_) {
+    result.Insert(str.GetSymbol());
+  }
+
+  return result;
 }

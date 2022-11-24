@@ -26,11 +26,13 @@ class Alfabeto {
   Alfabeto(std::string);
 
   void Insert(char);
-  inline int Size(void) {return alpha_symbol_.size();}
-  inline std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
-  std::string GetAlpha(void) const;
 
+  // GETTERS
+  inline int Size(void) const { return alpha_symbol_.size(); }
+  inline std::set<Simbolo> GetSetAlpha(void) const { return alpha_symbol_; }
+ 
   friend std::ostream& operator<<(std::ostream&, const Alfabeto&);
+  friend Alfabeto operator+(const Alfabeto&, const Alfabeto&);
 
  private:
   std::set<Simbolo> alpha_symbol_;

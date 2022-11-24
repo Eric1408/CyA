@@ -27,6 +27,7 @@ class Simbolo {
   inline void SetSymbol(char input) {symbol_ = input;}
   
   friend bool operator<(const Simbolo&, const Simbolo&);
+  friend bool operator!=(const Simbolo&, const Simbolo&);
   friend std::ostream& operator<<(std::ostream&, const Simbolo&);
 
  private:

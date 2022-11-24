@@ -1,0 +1,15 @@
+S -> QXDX
+S -> QDX
+S -> QXD
+S -> QD
+D -> b
+Q -> a
+X -> QY
+X -> DY
+X -> a
+X -> b
+Y -> QY
+Y -> DY
+Y -> a
+Y -> b
+Y -> c
