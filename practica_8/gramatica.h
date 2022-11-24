@@ -43,7 +43,7 @@ class Gramatica {
   void Replace(char, char);
   char GenerateSymbol(void) const; 
   //char RecursiveChange(std::string);
-  void Last(Producciones&);
+  void Last(std::string, char, int);
 
   friend std::ostream& operator<<(std::ostream&, const Gramatica&);
 

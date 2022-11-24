@@ -88,9 +88,9 @@ void Gramatica::ToChomsky(void) {
     for (size_t i = 0; i < it.second.size(); ++i) {
       // PRODUCCIONES_[IT][VECTOR]
       //std::cout << "  " << it.second[i] << std::endl;
-      std::string copy = it.second[i];
+      
       if (it.second[i].size() >= 3) {
-        
+        Last();
         //for (size_t j = 0; j < copy.size() - 1; ++j) {
         //  // PRODUCCIONES_[IT][VECTOR][STRING]
         //  // hacer una func recursiva?
@@ -104,9 +104,30 @@ void Gramatica::ToChomsky(void) {
   }
 }
 
-void Gramatica::Last(Producciones& in) {
-  for (auto& it : in) {
-    
+void Gramatica::Last(std::string in, char index, int pos) {
+  char aux_1, aux_2, aux_3;
+  for (size_t i = 0; i <= in.size() - 2; i++) {
+    if (i == 0) {
+      producciones_[Simbolo(index)][pos].clear();
+      producciones_[Simbolo(index)][pos].push_back(in[i]);
+      aux_1 = GenerateSymbol();
+      AddNoTerminal(aux_1);
+      producciones_[Simbolo(index)][pos].push_back(aux_1);
+    } else if (i < in.size() - 2) {
+      aux_2 = aux_1;
+      std::string to_push;
+      to_push.push_back(in[i]);
+      aux_3 = GenerateSymbol();
+      to_push.push_back(aux_3);
+      producciones_[Simbolo(aux_2)].push_back(to_push);
+      AddNoTerminal(aux_3);
+      
+    } else if (i == in.size() - 2) { 
+      std::string to_push;
+      to_push.push_back(in[i]);
+      to_push.push_back(in[i+1]);
+      producciones_[Simbolo(aux_3)].push_back(to_push);
+    }
   }
 }
 
