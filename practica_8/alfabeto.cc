@@ -20,7 +20,7 @@ void Alfabeto::Insert(char input) {
 
 std::ostream& operator<<(std::ostream& out, const Alfabeto& input) {
   for (auto& str : input.alpha_symbol_) {
-    out << str.GetSymbol() << " ";
+    out << str.GetSymbol() << std::endl;
   }
   
   return out;

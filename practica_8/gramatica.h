@@ -1,3 +1,18 @@
+/**
+ * 
+ * Universidad de La Laguna
+ * Escuela Superior de Ingenieria y Tecnologia
+ * Grado en Ingenieria Informatica
+ * Curso: 2do
+ * @category Computabilidad y Algoritmia
+ * @file gramatica.h
+ * @author Eric Angueta Rogel || alu0101335339@ull.edu.es
+ * @version 0.1
+ * @date 2022-09-29
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #pragma once
 
 #include <iostream>
@@ -42,8 +57,7 @@ class Gramatica {
   void ToChomsky(void);
   void Replace(char, char);
   char GenerateSymbol(void) const; 
-  //char RecursiveChange(std::string);
-  void Last(std::string, char, int);
+  void ChurroMetodo(std::string, char, int);
 
   friend std::ostream& operator<<(std::ostream&, const Gramatica&);
 

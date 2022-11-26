@@ -1,15 +1,27 @@
-S -> QXDX
-S -> QDX
-S -> QXD
-S -> QD
-D -> b
-Q -> a
-X -> QY
-X -> DY
-X -> a
-X -> b
-Y -> QY
-Y -> DY
-Y -> a
-Y -> b
-Y -> c
+2
+a
+b
+9
+A
+B
+G
+K
+L
+P
+Q
+R
+S
+S
+12
+S -> LP
+S -> AQ
+A -> a
+A -> AG
+B -> b
+B -> LR
+G -> KA
+K -> a
+L -> b
+P -> KL
+Q -> BA
+R -> BB

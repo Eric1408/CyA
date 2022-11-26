@@ -59,7 +59,8 @@ bool Gramatica::IsNoTerminal(char input) const {
 }
 
 /**
- * @brief 
+ * @brief Metodo que permite pasar una gramatica independiente del contexto a Chomsky
+ *  
  * 
  */
 void Gramatica::ToChomsky(void) {  
@@ -72,7 +73,6 @@ void Gramatica::ToChomsky(void) {
             std::string to_push("");
             to_push.push_back(symbol_it);
             char new_symbol(GenerateSymbol());
-
             AddNoTerminal(new_symbol);
             producciones_[Simbolo(new_symbol)].push_back(to_push);
             Replace(symbol_it, new_symbol);
@@ -81,30 +81,19 @@ void Gramatica::ToChomsky(void) {
       }
     }
   }
+  
   Producciones aux = producciones_;
-  // ACCEDE A PRODUCCIONES_[IT]
   for (auto& it : aux) {
-    //std::cout << it.first << ": \n";
     for (size_t i = 0; i < it.second.size(); ++i) {
-      // PRODUCCIONES_[IT][VECTOR]
-      //std::cout << "  " << it.second[i] << std::endl;
-      
       if (it.second[i].size() >= 3) {
-        Last();
-        //for (size_t j = 0; j < copy.size() - 1; ++j) {
-        //  // PRODUCCIONES_[IT][VECTOR][STRING]
-        //  // hacer una func recursiva?
-        //  if (IsNoTerminal(it.second[i][j])) {
-        //    char new_symbol(GenerateSymbol());
-        //    AddNoTerminal(new_symbol);
-        //  }
-        //}
+        ChurroMetodo(it.second[i], it.first.GetSymbol(), i);
+        
       }
     }
   }
 }
 
-void Gramatica::Last(std::string in, char index, int pos) {
+void Gramatica::ChurroMetodo(std::string in, char index, int pos) {
   char aux_1, aux_2, aux_3;
   for (size_t i = 0; i <= in.size() - 2; i++) {
     if (i == 0) {
@@ -121,32 +110,19 @@ void Gramatica::Last(std::string in, char index, int pos) {
       to_push.push_back(aux_3);
       producciones_[Simbolo(aux_2)].push_back(to_push);
       AddNoTerminal(aux_3);
+      aux_1 = aux_3;
       
     } else if (i == in.size() - 2) { 
+      aux_3 = aux_1;
       std::string to_push;
       to_push.push_back(in[i]);
       to_push.push_back(in[i+1]);
+      AddNoTerminal(aux_3);
       producciones_[Simbolo(aux_3)].push_back(to_push);
     }
   }
-}
-
-//char Gramatica::RecursiveChange(std::string input) {
   
-
-  //if (input.size() <= 2) {
-  //  char chr = GenerateSymbol();
-  //  //producciones_[Simbolo(chr)].push_back(input);
-  //  
-  //  return chr;
-  //} else {
-  //  
-  //  char ch = RecursiveChange(input.substr(1, input.size()));
-  //  
-  //  //producciones_[Simbolo(ch)].push_back();
-  //}
-   
-//}
+}
 
 /**
  * @brief 
@@ -177,6 +153,18 @@ void Gramatica::Replace(char to_replace, char new_char) {
  */
 std::ostream& operator<<(std::ostream& out, const Gramatica& input) {
   Simbolo init = input.GetStart();
+  out << input.TerminalSize() << std::endl;
+  out << input.GetTerminals();
+
+  out << input.NoTerminalSize() << std::endl;
+  out << input.GetNoTerminals();
+
+  out << input.GetStart() << std::endl;
+  int counter{0};
+  for (auto const& it : input.GetProductions()) {
+    counter += it.second.size();
+  }
+  out << counter << std::endl;
   for (int i = 0; i < input.ProdSize(init); ++i) {
     out << input.GetStart() << " -> " << input.GetProductions().at(init)[i] << std::endl;
   }

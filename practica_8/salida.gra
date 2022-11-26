@@ -1,0 +1,35 @@
+3
+a
+b
+c
+9
+F
+G
+J
+M
+P
+S
+T
+X
+Y
+S
+19
+S -> FJ
+S -> FM
+S -> FG
+S -> FP
+F -> a
+G -> XP
+J -> XT
+M -> PX
+P -> b
+T -> PX
+X -> FY
+X -> PY
+X -> a
+X -> b
+Y -> FY
+Y -> PY
+Y -> a
+Y -> b
+Y -> c
