@@ -1,4 +1,4 @@
- /**
+/**
  * 
  * Universidad de La Laguna
  * Escuela Superior de Ingenieria y Tecnologia
@@ -18,8 +18,9 @@
 
 #include "simbolo.h"
 
-const char EMPTYCHAIN = '&';
-
+/**
+ * @class Alfabeto
+*/
 class Alfabeto {
  public:
   Alfabeto(void) : alpha_symbol_{} {}
@@ -28,7 +29,7 @@ class Alfabeto {
   void Build(char input);
   std::string GetAlpha(void) const;
   inline int Size(void) {return alpha_symbol_.size();}
-  inline std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
+  std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
 
  private:
   std::set<Simbolo> alpha_symbol_;

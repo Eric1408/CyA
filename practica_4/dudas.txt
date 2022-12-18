@@ -1,0 +1,3 @@
+Warnnings en el constructor de analyzer
+Comentarios multilinea
+Se puede mejorar/optimizar

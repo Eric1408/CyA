@@ -1,35 +1,37 @@
-  /**
+#include "alfabeto.h"
+/**
+ * @brief Construct a new Alfabeto:: Alfabeto object
  * 
- * Universidad de La Laguna
- * Escuela Superior de Ingenieria y Tecnologia
- * Grado en Ingenieria Informatica
- * Curso: 2do
- * @category Computabilidad y Algoritmia
- * @file alfabeto.h
- * @author Eric Angueta Rogel || alu0101335339@ull.edu.es
- * @version 0.1
- * @date 2022-09-29
- * 
- * @copyright Copyright (c) 2022
+ * @param in 
+ */
+Alfabeto::Alfabeto(std::string in) {
+  for (size_t i = 0; i < in.size(); ++i) {
+    this -> Build(in[i]);
+  }
+}
+
+/**
+ * @brief Metodo para obtener el alfabeto
  * 
  */
-#pragma once
-#include <set>
+std::string Alfabeto::GetAlpha(void) const {
+  std::string result{""};
+  for (auto& str: alpha_symbol_) {
+    result.push_back(str.GetSymbol());
+    result += " ";
+  }
+  if (result.size() >= 2) {
+    result.pop_back();
+  }
 
-#include "simbolo.h"
+  return result;
+}
 
-const char EMPTYCHAIN = '&';
+/**
+ * @brief Metodo que es una especie de constructor de alfabeto
+*/
+void Alfabeto::Build(char input) {
+  if (input != EMPTYCHAIN && input != ' ')
+    alpha_symbol_.insert(input);
+}
 
-class Alfabeto {
- public:
-  Alfabeto(void) : alpha_symbol_{} {}
-  Alfabeto(std::string);
-
-  void Build(char input);
-  std::string GetAlpha(void) const;
-  inline int Size(void) {return alpha_symbol_.size();}
-  std::set<Simbolo> GetSetAlpha(void) const {return alpha_symbol_;}
-
- private:
-  std::set<Simbolo> alpha_symbol_;
-};
