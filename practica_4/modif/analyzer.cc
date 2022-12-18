@@ -5,10 +5,11 @@
  * @brief Metodo que permite construir la clase Analyzer
 */
 void Analyzer::Build(std::string input, int pos) {
-  std::regex expression_var("[^[:graph:]](int|double)\\s(\\w+(\\s=\\s\\d+)?)");
+  std::regex expression_var("[^[:graph:]](int|double)\\s(\\w+(\\s*=\\s*\\w+)?)");
   std::regex expression_loop("\\s*[^\\w](for|while)");
   std::regex expression_main("int main");
-  std::regex expression_comments("^\\s*(\\/\\/.*)");
+  //std::regex expression_comments("^\\s*(\\/\\/.*)");
+  std::regex expression_comments("^\\s*(\\/\\/.*)|^\\s*[^:]\\s*(\\/\\/.*)");
   //std::regex expression_comments("^\\s*(\\/\\/.*)|^\\s*(\\/\\*)|^\\s*.*|^\\s*(\\*\\/)");
   std::regex expression_description("(\\/\\*\\*)|(^\\s\\*.*)");
   //std::regex descript_ini("^\\/\\*\\*");
@@ -66,4 +67,37 @@ std::ostream& operator<<(std::ostream& out, const Analyzer& kAnaly) {
   }
   
   return out;
+}
+
+void Analyzer::DeleteFor(std::string lines) {
+  std::regex expression_loop("\\s*[^\\w](for).*");
+  std::smatch matches;
+
+  if (!std::regex_search(lines, matches, expression_loop)) {
+    new_code_.push_back(lines + "\n");
+  }
+}
+
+bool Analyzer::ForIni(std::string input) {
+  std::regex expression_loop("\\s*[^\\w](for).*");
+  std::smatch matches;
+
+  if (std::regex_search(input, matches, expression_loop)) {
+    for_ini_ = true;
+    return true;
+  } 
+  
+  return false;
+}
+
+bool Analyzer::ForFin(std::string input) {
+  std::regex expression_loop("^\\s\\}$");
+  std::smatch matches;
+
+  if (std::regex_search(input, matches, expression_loop)) {
+    return true;
+    for_ini_ = true;
+  } 
+  for_ini_ = false;
+  return false;
 }

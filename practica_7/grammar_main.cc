@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 
   Automata autom(file_in);
   Grammar gramatica(autom);
-  std::cout << gramatica;
+  output << gramatica;
 
   return 0;
 }

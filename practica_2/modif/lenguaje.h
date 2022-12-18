@@ -1,4 +1,4 @@
- #pragma once
+#pragma once
 
 #include <string>
 #include <iterator>
@@ -30,6 +30,7 @@ class Lenguaje{
   friend Lenguaje operator-(const Lenguaje&, const Lenguaje&);
   friend std::ostream& operator<<(std::ostream&, const Lenguaje&);
 
+  friend Lenguaje operator*(const Lenguaje&, std::string);
  private:
   Alfabeto alpha_;
   std::set<Cadena> cadenas_;

@@ -1,0 +1,5 @@
+{ a b c h l o } { aaaabhola aacbhola aahola abcaaabhola abcacbhola abcahola abcbcahola bbccaaabhola bbccacbhola bbccahola bbccbcahola cabaaabhola cabacbhola cabahola cabbcahola }
+{ a d h l o } { }
+{ a b d e h l o } { }
+{ 0 1 2 3 a h l o } { &&hola }
+{ 0 1 2 3 a h l o } { 0022hola 0023hola 002hola 0032hola 0033hola 003hola 0122hola 0123hola 012hola 0132hola 0133hola 013hola 022hola 023hola 02hola 032hola 033hola 03hola 1022hola 1023hola 102hola 1032hola 1033hola 103hola 1122hola 1123hola 112hola 1132hola 1133hola 113hola 122hola 123hola 12hola 132hola 133hola 13hola }
