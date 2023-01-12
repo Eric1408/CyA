@@ -17,16 +17,38 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
+#include <chrono>
 
 //#include "usage.h"
-//#include "karatsuba.h"
+#include "BigInt.h"
 
 int main(int argc, char* argv[]) {
-  std::cout << "bien";
-  int a = atoi(argv[1]);
-  std::cout << argc << std::endl;
-  std::cout << argv[1] << std::endl;
+  std::string numb1, numb2;
+  
+  std::cin >> numb1;
+  std::cin >> numb2;
+
+  BigInt n1(numb1);
+  BigInt n2(numb2);
+  
+  if (std::string(argv[1]) == "-k") {
+    auto start = std::chrono::high_resolution_clock::now();
+    std::cout << KaratsubaBigInt(n1, n2) << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << "duracion: " << duration.count() << std::endl;
+  
+  } else if (std::string(argv[1]) == "-m") {
+    auto start = std::chrono::high_resolution_clock::now();
+    std::cout << n1 * n2 << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << "duracion: " << duration.count() << std::endl;
+  
+  }
+  
+  //Karatsuba kara(n1, n2);
+  //kara.Metodo(n1, n2);
   
   return 0;
 }
