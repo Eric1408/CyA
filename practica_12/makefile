@@ -4,7 +4,7 @@ LDFLAGS =
 
 all: multbigint
 
-multbigint: usage.o karatsuba.o BigInt.o main.o
+multbigint: usage.o BigInt.o main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: all clean

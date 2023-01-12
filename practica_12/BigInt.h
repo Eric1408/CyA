@@ -74,9 +74,8 @@ public:
 	friend BigInt NthCatalan(int n);
 	friend BigInt NthFibonacci(int n);
 	friend BigInt Factorial(int n);
-	//friend BigInt Karatsuba(const BigInt& num1, const BigInt& num2);
-	//friend std::string KaratsubaStr( std::string& x,  std::string& y);
 	friend BigInt KaratsubaBigInt( BigInt&,  BigInt&);
   
 };
 
+std::string GenerateRandomNumber(int);

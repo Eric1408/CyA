@@ -1,5 +1,10 @@
 #include "BigInt.h"
 
+/**
+ * @brief Construct a new Big Int:: Big Int object
+ * 
+ * @param s 
+ */
 BigInt::BigInt(const string & s){
 	digits = "";
 	int n = s.size();
@@ -9,12 +14,24 @@ BigInt::BigInt(const string & s){
 		digits.push_back(s[i] - '0');
 	}
 }
+
+/**
+ * @brief Construct a new Big Int:: Big Int object
+ * 
+ * @param nr 
+ */
 BigInt::BigInt(unsigned long long nr){
 	do{
 		digits.push_back(nr % 10);
 		nr /= 10;
 	} while (nr);
 }
+
+/**
+ * @brief Construct a new Big Int:: Big Int object
+ * 
+ * @param s 
+ */
 BigInt::BigInt(const char *s){
 	digits = "";
 	for (int i = strlen(s) - 1; i >= 0;i--)
@@ -24,6 +41,12 @@ BigInt::BigInt(const char *s){
 		digits.push_back(s[i] - '0');
 	}
 }
+
+/**
+ * @brief Construct a new Big Int:: Big Int object
+ * 
+ * @param a 
+ */
 BigInt::BigInt(const BigInt & a){
 	digits = a.digits;
 }
@@ -360,13 +383,7 @@ istream &operator>>(istream &in,BigInt&a){
 			throw("ERROR");
 		a.digits.push_back(s[i] - '0');
 	}
-  // ERROR: orignal code wrong
-	//int n = s.size();
-	//for (int i = n - 1; i >= 0;i--){
-	//	if(!isdigit(s[i]))
-	//		throw("INVALID NUMBER");
-	//	a.digits[n - i - 1] = s[i];
-	//}
+
 	return in;
 }
 
@@ -386,38 +403,31 @@ std::string BigInt::GetDigit(void) const {
 	return resu;
 }
 
+/**
+ * @brief karatsuba
+ * 
+ * @param x 
+ * @param y 
+ * @return BigInt 
+ */
 BigInt KaratsubaBigInt( BigInt& x,  BigInt& y) {
 	int n = max(Length(x), Length(y));
 	std::string digit_x = x.GetDigit();
 	std::string digit_y = y.GetDigit(); 
 	std::string to_big;
 
-	//std::cout << "digit_x: " << digit_x << std::endl;
-  //std::cout << "digit_y: " << digit_y << std::endl;
-
   if (Length(x) < n) x = BigInt(to_big = std::string(n - Length(x), '0') + digit_x);
 	if (Length(y) < n) y = BigInt(to_big = std::string(n - Length(y), '0') + digit_y);
 	
-	//std::cout << "x: " << x << std::endl;
-	//std::cout << "y: " << y << std::endl;
-
   if (n == 1) return x * y;
 
   int m = n / 2;
-	//std::cout << "prueba3\n";
 	digit_x = x.GetDigit();
 	digit_y = y.GetDigit();
   BigInt a = to_big = digit_x.substr(0, m);
-  //std::cout << "a: " << a << std::endl;
-	
 	BigInt b = to_big = digit_x.substr(m);
-  //std::cout << "b: " << b << std::endl;
-	
 	BigInt c = to_big = digit_y.substr(0, m);
-  //std::cout << "c: " << c << std::endl;
-	
 	BigInt d = to_big = digit_y.substr(m);
-	//std::cout << "d: " << d << std::endl;
 	
   BigInt ac = KaratsubaBigInt(a, c);
   BigInt bd = KaratsubaBigInt(b, d);
@@ -436,4 +446,16 @@ BigInt KaratsubaBigInt( BigInt& x,  BigInt& y) {
     ad_bc *= 10;
 
   return ac + ad_bc + bd;
+}
+
+std::string GenerateRandomNumber(int n) {
+  std::string res = "";
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_int_distribution<> dis(0, 9);
+  for (int i = 0; i < n; i++) {
+    res += to_string(dis(gen));
+  }
+
+  return res;
 }
